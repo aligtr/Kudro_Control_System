@@ -13,7 +13,7 @@ extern uint8_t frameBuff[3];
 extern uint8_t reciveStatus;
 extern double echo_angle[12];
 uint16_t rej;
-uint8_t mode=0;
+uint8_t mode=1;
 extern int war;
 int main(void)
 {
