@@ -631,7 +631,7 @@ void normaliz(){
 	if (fabs(Rg0)>k_dir) Rg0=sign(Rg0)*k_dir;
 	R=L/2/tan(Rg0);
 	if (fabs(R)<0.2) R=0.2*sign(R);
-	R=R*3;													//ограничение радиуса (угол около 50)
+	R=R*3;//ограничение радиуса (угол около 50)
 	d_rx=(rx_mean-rx_period_mean);
 	if (fabs(d_rx)<10) d_rx=0;
 	V=(d_vel)*k_vel/vel_period_max*(d_rx/rx_period_max);
