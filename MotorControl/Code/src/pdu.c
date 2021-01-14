@@ -499,8 +499,6 @@ void kinematica(){
 			k_vel=0;
 		break;
 	}
-	//if(V>10) return;
-	//if (fabs(gam)>3.14/2) gam=sign(gam)*3.14/2;
 	if (fabs(R)>900) R=10000;
 	x=R*cos(3.14/2+gam);
 	y=R*sin(3.14/2+gam);
@@ -612,23 +610,6 @@ void kinematica(){
 	uartTransmitt(0x0B,UART5);
 	uartTransmittBuff((uint8_t*)&gamma,sizeof(uint16_t),UART5);
 	uartTransmitt(mode,UART5);
-		/*while(!(UART5->SR & USART_SR_TC));
-		
-		UART5->DR=(uint16_t)((gam*57.3+180));
-
-		sprintf(str1,"gam:%d.%d; R:%d.%d; V:%d.%d; L:%d.%d; C:%d.%d;\r\n",
-				(int)gam,ost(gam),(int)R,ost(R), (int)V,ost(V), (int)L,ost(L), (int)C,ost(C));
-		sprintf(str2,"gfl:%d.%d; gfr:%d.%d; grl:%d.%d; grr:%d.%d;\r\n",
-				(int)gfl,ost(gfl),(int)gfr,ost(gfr), (int)grl,ost(grl), (int)grr,ost(grr));
-		sprintf(str3,"Vfl:%d.%d; Vfr:%d.%d; Vrl:%d.%d; Vrr:%d.%d;\r\n",
-				(int)Vfl,ost(Vfl),(int)Vfr,ost(Vfr), (int)Vrl,ost(Vrl), (int)Vrr,ost(Vrr));
-		sprintf(str4,"a1:%d; c1:%d;\r\n",
-				(int)pwm_aim_ch1,(int)pwm_count_ch1);
-		//print_data(vel_mean, dir_mean, rx_mean, ry_mean);
-		//send_str(str1);
-		send_str(str2);
-		send_str(str3);
-		send_str(str4);*/
 }
 
 void normaliz(){
@@ -642,27 +623,22 @@ void normaliz(){
 	if(rx_mean>800 || rx_mean<400) rx_mean=vel_period_mean;
 	if(ry_mean>800 || ry_mean<400) ry_mean=vel_period_mean;
 	
-	d_dir=(dir_mean-dir_period_mean);//*10000/dir_period_max;
+	d_dir=(dir_mean-dir_period_mean);
 	d_vel=(vel_mean-vel_period_mean);
 	if (fabs(d_dir)<20) d_dir=0;
 	if (fabs(d_vel)<20) d_vel=0;
 	Rg0=d_dir*k_dir/dir_period_max;
 	if (fabs(Rg0)>k_dir) Rg0=sign(Rg0)*k_dir;
 	R=L/2/tan(Rg0);
-	//R=(fabs(d_dir)-10000);//*sign(d_dir);
-	if (fabs(R)<0.2) R=0.001*sign(R);
+	if (fabs(R)<0.2) R=0.2*sign(R);
+	R=R*3;													//ограничение радиуса (угол около 50)
 	d_rx=(rx_mean-rx_period_mean);
 	if (fabs(d_rx)<10) d_rx=0;
 	V=(d_vel)*k_vel/vel_period_max*(d_rx/rx_period_max);
 	d_ry=ry_mean-ry_period_mean;
 	if (fabs(d_ry)<20) d_ry=0;
-	gam=pi*(d_ry)/ry_period_max;
+	gam=pi/2*(d_ry)/ry_period_max; // пределы измерения угла
 	if (fabs(gam)<0.01) gam=0;
-	if (fabs(gam)>(pi/2-0.1)) gam=pi/2*sign(gam);
+	if (fabs(gam)>(pi/4-0.1)) gam=pi/4*sign(gam);//мертвая зона по углу
 	if (gam!=0) R=100000;
-	/*
-	d_rx=fabs(d_rx);
-	if (fabs(d_rx)<20) d_rx=0;
-	if (fabs(d_ry)<20) d_ry=0;
-	gam=-atan2(d_ry,d_rx);*/
 }
