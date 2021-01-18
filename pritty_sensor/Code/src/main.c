@@ -36,7 +36,8 @@ int main(void)
   {
 		if(pduTimer>50)
 		{
-			mode = frameBuff[2];
+			//mode = frameBuff[2];
+			mode =1;
 			pduTimer=0;
 				gam=-1*((uint16_t)(frameBuff[0]+(frameBuff[1]<<8))-180);
 				//9,10,11
@@ -44,15 +45,15 @@ int main(void)
 			//if (gam==0) gam=180;
 				if((gam<=0 && gam>=-180) || gam==180)
 				{
-					echo_angle[9]=map(fabs(gam),0,180,0,120);
+					echo_angle[9]=map(fabs(gam),0,180,30,90);
 					echo_angle[10]=echo_angle[9];
 					echo_angle[11]=echo_angle[9];
 				}
 				else
 				{
-					echo_angle[9]=45;
+					echo_angle[9]=60;
 					echo_angle[10]=60;
-					echo_angle[11]=75;
+					echo_angle[11]=60;
 					echo_mes[9]=1000;
 					echo_mes[10]=1000;
 					echo_mes[11]=1000;
@@ -61,15 +62,15 @@ int main(void)
 				//3,4,5
 				if((gam>=0 && gam<=180) ||gam==-180)
 				{
-					echo_angle[3]=map(fabs(gam),0,180,120,0);
+					echo_angle[3]=map(fabs(gam),0,180,120,60);
 					echo_angle[4]=echo_angle[3];
 					echo_angle[5]=echo_angle[3];
 				}
 				else
 				{
-					echo_angle[3]=45;
+					echo_angle[3]=60;
 					echo_angle[4]=60;
-					echo_angle[5]=75;
+					echo_angle[5]=60;
 					echo_mes[3]=1000;
 					echo_mes[4]=1000;
 					echo_mes[5]=1000;
@@ -77,7 +78,7 @@ int main(void)
 				//1
 				if(gam>=-90 && gam<=90)
 				{
-					echo_angle[1]=map(gam,-90,90,150,0);
+					echo_angle[1]=map(gam,-90,90,130,20);
 				}
 				else
 				{
@@ -87,7 +88,7 @@ int main(void)
 				//0
 				if(gam>=-180 && gam<=90)
 				{
-					echo_angle[0]=map(gam,-180,90,180,0);
+					echo_angle[0]=map(gam,-180,90,180,15);
 				}
 				else
 				{
@@ -97,7 +98,7 @@ int main(void)
 				//2
 				if(gam>=-90 && gam<=180)
 				{
-					echo_angle[2]=map(gam,-90,180,180,0);
+					echo_angle[2]=map(gam,-90,180,180,15);
 				}
 				else
 				{
@@ -109,7 +110,7 @@ int main(void)
 				//8
 				if((gam>=-180 && gam<=90))
 				{
-					echo_angle[8]=map(gam,90,-180,180,0);
+					echo_angle[8]=map(gam,90,-180,180,15);
 				}
 				else
 				{
@@ -119,7 +120,7 @@ int main(void)
 				//7
 				if(gam<=90 && gam>=-90)
 				{
-					echo_angle[7]=map(gam,90,-90,150,0);
+					echo_angle[7]=map(gam,90,-90,130,20);
 				}
 				else
 				{
@@ -129,7 +130,7 @@ int main(void)
 				//6
 				if((gam>=-90 && gam<=180))
 				{
-					echo_angle[6]=map(gam,180,-90,180,0);
+					echo_angle[6]=map(gam,180,-90,180,15);
 
 				}
 				else
@@ -137,10 +138,10 @@ int main(void)
 					echo_angle[6]=30+45;
 					echo_mes[6]=1000;
 				}
-				for(war=20;war<400;war+=20){
+				for(war=50;war<400;war+=20){
 					if (echo_mes[0]<war||echo_mes[1]<war||echo_mes[2]<war||echo_mes[3]<war||echo_mes[4]<war||echo_mes[5]<war||
 							echo_mes[6]<war||echo_mes[7]<war||echo_mes[8]<war||echo_mes[9]<war||echo_mes[10]<war||echo_mes[11]<war){
-								temp=(uint16_t)(war/10);
+								temp=(war<400) ? (uint16_t)(war/10-5) : (uint16_t)10;
 								uartTransmitt(0x0B,USART2);
 								uartTransmittBuff((uint8_t*)&temp,2,USART2);
 						break;

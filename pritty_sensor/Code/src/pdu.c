@@ -5,6 +5,7 @@ double gam;
 double echo_angle[12];
 double echo_mes[12];
 double start_mes;
+double echo_filter[12];
 char pack;
 int pduTimer;
 int echo_count;
@@ -15,7 +16,7 @@ void tim1Init(void)
 	GPIOE->AFR[1]|=(1<<4)|(1<<12)|(1<<20);//AF1 enable
 		RCC->APB2ENR |= RCC_APB2ENR_TIM1EN;
 	TIM1->CCER = 0;
-	TIM1->ARR = 10000;
+	TIM1->ARR = 5000;
 	TIM1->PSC = 1680-1;
 	TIM1->BDTR |= TIM_BDTR_MOE;
 	TIM1->CCMR1 |= TIM_CCMR1_OC1M_1 | TIM_CCMR1_OC1M_2;
@@ -59,10 +60,10 @@ void tim2Init(void)
 	TIM2->CCMR2 |= TIM_CCMR2_OC4M_1 | TIM_CCMR2_OC4M_2;
 	TIM2->CCER |= TIM_CCER_CC4E;
 	TIM2->CR1 |= TIM_CR1_ARPE|TIM_CR1_URS|TIM_CR1_CEN;
-	TIM2->CCR1=50;
+	/*TIM2->CCR1=50;
 	TIM2->CCR2=50;
 	TIM2->CCR3=50;
-	TIM2->CCR4=50;
+	TIM2->CCR4=50;*/
 }
 
 void tim4Init(void)
@@ -86,10 +87,10 @@ void tim4Init(void)
 	TIM4->CCMR2 |= TIM_CCMR2_OC4M_1 | TIM_CCMR2_OC4M_2;
 	TIM4->CCER |= TIM_CCER_CC4E;
 	TIM4->CR1 |= TIM_CR1_CEN;
-	TIM4->CCR1=50;
+	/*TIM4->CCR1=50;
 	TIM4->CCR2=50;
 	TIM4->CCR3=50;
-	TIM4->CCR4=50;
+	TIM4->CCR4=50;*/
 }
 
 void tim5Init(void)
@@ -99,7 +100,7 @@ void tim5Init(void)
 	GPIOA->AFR[0]|=(2<<0)|(2<<4)|(2<<8)|(2<<12);
 	RCC->APB1ENR|=RCC_APB1ENR_TIM5EN;//???????? ???????????? ???????-???????? 9
 	TIM5->PSC=1680-1;//???????? ?? 10???
-	TIM5->ARR=10000;//??????? ?? ?????
+	TIM5->ARR=5000;//??????? ?? ?????
 	//????? 1
 	TIM5->CCMR1|=1|(1<<8);
 	//????? 3
@@ -142,10 +143,10 @@ void tim8Init(void)
 	TIM8->CCMR2 |= TIM_CCMR2_OC4M_1 | TIM_CCMR2_OC4M_2;
 	TIM8->CCER |= TIM_CCER_CC4E;
 	TIM8->CR1 |= TIM_CR1_CEN;
-	TIM8->CCR1=50;
+	/*TIM8->CCR1=50;
 	TIM8->CCR2=50;
 	TIM8->CCR3=50;
-	TIM8->CCR4=50;
+	TIM8->CCR4=50;*/
 }
 
 void tim6Init(void)
@@ -250,26 +251,41 @@ void TIM5_IRQHandler(void){
 	double a;
 	if (TIM5->SR & TIM_SR_CC1IF){
 		TIM5->SR &=~TIM_SR_CC1IF;
-		if (TIM5->CCR1>start_mes) echo_mes[pack+0] = (TIM5->CCR1-start_mes)/58 *10-24;
+		if (TIM5->CCR1>start_mes) echo_filter[echo_count+0] = (TIM5->CCR1-start_mes)/58 *10-20;
 		//else echo_mes[pack+0]=1000;
 	}
 	if (TIM5->SR & TIM_SR_CC2IF){
 		TIM5->SR &=~TIM_SR_CC2IF;
-		if (TIM5->CCR2>start_mes) echo_mes[pack+3] = (TIM5->CCR2-start_mes)/58 *10-24;
+		if (TIM5->CCR2>start_mes) echo_filter[echo_count+3] = (TIM5->CCR2-start_mes)/58 *10-20;
 		//else echo_mes[pack+3]=1000;
 	}
 	if (TIM5->SR & TIM_SR_CC3IF){
 		TIM5->SR &=~TIM_SR_CC3IF;
-		if (TIM5->CCR3>start_mes) echo_mes[pack+6] = (TIM5->CCR3-start_mes)/58 *10-24;
+		if (TIM5->CCR3>start_mes) echo_filter[echo_count+6] = (TIM5->CCR3-start_mes)/58 *10-20;
 		//else echo_mes[pack+6]=1000;
 	}
 	if (TIM5->SR & TIM_SR_CC4IF){
 		TIM5->SR &=~TIM_SR_CC4IF;
-		if (TIM5->CCR4>start_mes) echo_mes[pack+9] = (TIM5->CCR4-start_mes)/58 *10-24;
+		if (TIM5->CCR4>start_mes) echo_filter[echo_count+9] = (TIM5->CCR4-start_mes)/58 *10-20;
 		//else echo_mes[pack+9]=1000;
 	}
 }
-
+double med_filt(double* echo_filter, char package){
+	double middle;
+	double a=echo_filter[0+package];
+	double b=echo_filter[1+package];
+	double c=echo_filter[2+package];
+	if ((a <= b) && (a <= c)) {
+		middle = (b <= c) ? b : c;
+	} else {
+		if ((b <= a) && (b <= c)) {
+			middle = (a <= c) ? a : c;
+		} else {
+			middle = (a <= b) ? a : b;
+		}
+	}
+	return middle;
+}
 void TIM1_CC_IRQHandler(void){
 	if ((TIM1->SR & TIM_SR_UIF)){
 		TIM1->SR &=~ TIM_SR_CC1IF;
@@ -280,6 +296,10 @@ void TIM1_CC_IRQHandler(void){
 		//UPD();
 		//tim5Init();
 		if (echo_count>2){
+			echo_mes[pack+0]=med_filt(echo_filter, 0);
+			echo_mes[pack+3]=med_filt(echo_filter, 3);
+			echo_mes[pack+6]=med_filt(echo_filter, 6);
+			echo_mes[pack+9]=med_filt(echo_filter, 9);
 			echo_count=0;
 			switch (pack){
 				case 0:		
