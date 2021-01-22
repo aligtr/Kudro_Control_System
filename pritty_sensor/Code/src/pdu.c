@@ -244,8 +244,8 @@ void TIM1_CC_IRQHandler(void){
 		sensFlag[2]=0;
 		sensFlag[3]=0;
 		//start_mes=TIM5->CNT;
-		TIM5->ARR=0;
-		TIM5->EGR |= TIM_EGR_UG;
+		//TIM5->ARR=0;
+		//TIM5->EGR |= TIM_EGR_UG;
 		TIM5->CR1 &=~ TIM_CR1_CEN;
 		if (echo_count==2){
 			echo_mes[pack+0]=med_filt(0);
@@ -280,8 +280,7 @@ void TIM1_CC_IRQHandler(void){
 		TIM1->SR &=~ TIM_SR_CC2IF;
 		TIM1->SR &=~ TIM_SR_CC3IF;
 		TIM1->SR &=~ TIM_SR_UIF;
-		TIM5->ARR=4000;
-		TIM5->CR1 |= TIM_CR1_CEN;
+		tim5Init();
 	}
 }
 
