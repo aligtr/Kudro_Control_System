@@ -6,9 +6,9 @@ double echo_angle[12];
 double echo_mes[12];
 double start_mes;
 double echo_filter[12];
-char pack;
+char pack=0;
 int pduTimer;
-int echo_count;
+int echo_count=0;
 uint8_t sensFlag[4]={0,0,0,0};
 void tim1Init(void)
 {
@@ -175,7 +175,6 @@ long map(long x,long inMin,long inMax,long outMin, long outMax)
 void TIM5_IRQHandler(void){
 	double a;
 	if (TIM5->SR & TIM_SR_UIF)  {
-		TIM5->SR &=~ TIM_SR_UIF;
 		if(sensFlag[0]!=1)
 		{
 			echo_filter[echo_count+0]=500;
@@ -196,27 +195,27 @@ void TIM5_IRQHandler(void){
 			echo_filter[echo_count+9]=500;
 			sensFlag[3]=1;
 		}
-		
+		TIM5->SR &=~ TIM_SR_UIF;
 	}
 	if (TIM5->SR & TIM_SR_CC1IF){
-		TIM5->SR &=~TIM_SR_CC1IF;
-		if (TIM5->CCR1>start_mes) echo_filter[echo_count+0] = (TIM5->CCR1-start_mes)/58 *10-20;
+		if (sensFlag[0]!=1) echo_filter[echo_count+0] = (TIM5->CCR1-start_mes)/58 *10-40;
 		sensFlag[0]=1;
+		TIM5->SR &=~TIM_SR_CC1IF;
 	}
 	if (TIM5->SR & TIM_SR_CC2IF){
-		TIM5->SR &=~TIM_SR_CC2IF;
-		if (TIM5->CCR2>start_mes) echo_filter[echo_count+3] = (TIM5->CCR2-start_mes)/58 *10-20;
+		if (sensFlag[1]!=1) echo_filter[echo_count+3] = (TIM5->CCR2-start_mes)/58 *10-20;
 		sensFlag[1]=1;
+		TIM5->SR &=~TIM_SR_CC2IF;
 	}
 	if (TIM5->SR & TIM_SR_CC3IF){
-		TIM5->SR &=~TIM_SR_CC3IF;
-		if (TIM5->CCR3>start_mes) echo_filter[echo_count+6] = (TIM5->CCR3-start_mes)/58 *10-20;
+		if (sensFlag[2]!=1) echo_filter[echo_count+6] = (TIM5->CCR3-start_mes)/58 *10-20;
 		sensFlag[2]=1;
+		TIM5->SR &=~TIM_SR_CC3IF;
 	}      
 	if (TIM5->SR & TIM_SR_CC4IF){
-		TIM5->SR &=~TIM_SR_CC4IF;
-		if (TIM5->CCR4>start_mes) echo_filter[echo_count+9] = (TIM5->CCR4-start_mes)/58 *10-20;
+		if (sensFlag[3]!=1) echo_filter[echo_count+9] = (TIM5->CCR4-start_mes)/58 *10-20;
 		sensFlag[3]=1;
+		TIM5->SR &=~TIM_SR_CC4IF;
 	}
 		
 }
@@ -238,19 +237,18 @@ double med_filt(char package){
 }
 void TIM1_CC_IRQHandler(void){
 	if ((TIM1->SR & TIM_SR_UIF)){
-		TIM1->SR &=~ TIM_SR_CC1IF;
-		TIM1->SR &=~ TIM_SR_CC2IF;
-		TIM1->SR &=~ TIM_SR_CC3IF;
-		TIM1->SR &=~ TIM_SR_UIF;
 		//UPD();
-		tim5Init();
+		//tim5Init();
 		sensFlag[0]=0;
 		sensFlag[1]=0;
 		sensFlag[2]=0;
 		sensFlag[3]=0;
-		start_mes=TIM5->CNT;
-		if (echo_count>1){
-			echo_mes[pack+0]=med_filt(0)-20;
+		//start_mes=TIM5->CNT;
+		TIM5->ARR=0;
+		TIM5->EGR |= TIM_EGR_UG;
+		TIM5->CR1 &=~ TIM_CR1_CEN;
+		if (echo_count==2){
+			echo_mes[pack+0]=med_filt(0);
 			echo_mes[pack+3]=med_filt(3);
 			echo_mes[pack+6]=med_filt(6);
 			echo_mes[pack+9]=med_filt(9);
@@ -276,11 +274,14 @@ void TIM1_CC_IRQHandler(void){
 				break;
 			}
 		}
-		else {
-			/*if (echo_count>25){
-			}*/
-			echo_count++;
-		}
+		else echo_count++;
+		
+		TIM1->SR &=~ TIM_SR_CC1IF;
+		TIM1->SR &=~ TIM_SR_CC2IF;
+		TIM1->SR &=~ TIM_SR_CC3IF;
+		TIM1->SR &=~ TIM_SR_UIF;
+		TIM5->ARR=4000;
+		TIM5->CR1 |= TIM_CR1_CEN;
 	}
 }
 
