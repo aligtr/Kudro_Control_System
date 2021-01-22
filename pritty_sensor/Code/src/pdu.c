@@ -111,7 +111,8 @@ void tim5Init(void)
 	TIM5->CCER|=TIM_CCER_CC2P;
 	TIM5->CCER|=TIM_CCER_CC3P;
 	TIM5->CCER|=TIM_CCER_CC4P;
-	TIM5->CR1|=TIM_CR1_CEN|TIM_CR1_ARPE|TIM_CR1_URS;
+	TIM5->CR1|=TIM_CR1_CEN;
+	TIM5->CR1|=TIM_CR1_OPM;
 	TIM5->DIER|=TIM_DIER_CC1IE;
 	TIM5->DIER|=TIM_DIER_CC2IE;
 	TIM5->DIER|=TIM_DIER_CC3IE;
@@ -237,16 +238,10 @@ double med_filt(char package){
 }
 void TIM1_CC_IRQHandler(void){
 	if ((TIM1->SR & TIM_SR_UIF)){
-		//UPD();
-		//tim5Init();
 		sensFlag[0]=0;
 		sensFlag[1]=0;
 		sensFlag[2]=0;
 		sensFlag[3]=0;
-		//start_mes=TIM5->CNT;
-		//TIM5->ARR=0;
-		//TIM5->EGR |= TIM_EGR_UG;
-		TIM5->CR1 &=~ TIM_CR1_CEN;
 		if (echo_count==2){
 			echo_mes[pack+0]=med_filt(0);
 			echo_mes[pack+3]=med_filt(3);
@@ -280,7 +275,7 @@ void TIM1_CC_IRQHandler(void){
 		TIM1->SR &=~ TIM_SR_CC2IF;
 		TIM1->SR &=~ TIM_SR_CC3IF;
 		TIM1->SR &=~ TIM_SR_UIF;
-		tim5Init();
+		TIM5->CR1|=TIM_CR1_CEN;
 	}
 }
 
