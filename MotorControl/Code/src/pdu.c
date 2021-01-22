@@ -19,7 +19,7 @@ double ry_period_mean=596;
 double ry_period_max=320;
 double k_vel=5;
 double k_dir=3.14;
-
+double absVel=0;
 	double d_dir;
 double gfl, gfr, grl, grr;
 double Vfl, Vfr, Vrl, Vrr;
@@ -490,7 +490,7 @@ void kinematica(){
 	switch(mode)
 	{
 		case 1:
-			k_vel=5*(constract)/35;// добавить 3 режима: 0, V, constract
+			k_vel=(constract);// добавить 3 режима: 0, V, constract
 			break;
 		case 2:
 			k_vel=5;// добавить 3 режима: 0, V, constract
@@ -499,8 +499,6 @@ void kinematica(){
 			k_vel=0;
 		break;
 	}
-	//if(V>10) return;
-	//if (fabs(gam)>3.14/2) gam=sign(gam)*3.14/2;
 	if (fabs(R)>900) R=10000;
 	x=R*cos(3.14/2+gam);
 	y=R*sin(3.14/2+gam);
@@ -604,31 +602,14 @@ void kinematica(){
 	}
 	else TIM12->CCR1 = 0xffff;
 	gam=gam*deg;
-	if (V<0) gam=-sign(gam)*(180-fabs(gam));
-	if (V<0 && gam==0) gam=-180;
+	if (absVel<0) gam=-sign(gam)*(180-fabs(gam));
+	if (absVel<0 && gam==0) gam=-180;
 	if (fmod(gam,5)>=2.5) gam=gam+(5-fmod(gam,5));
 	else gam=gam-fmod(gam,5);
 	gamma=(uint16_t)(gam+180);
 	uartTransmitt(0x0B,UART5);
 	uartTransmittBuff((uint8_t*)&gamma,sizeof(uint16_t),UART5);
 	uartTransmitt(mode,UART5);
-		/*while(!(UART5->SR & USART_SR_TC));
-		
-		UART5->DR=(uint16_t)((gam*57.3+180));
-
-		sprintf(str1,"gam:%d.%d; R:%d.%d; V:%d.%d; L:%d.%d; C:%d.%d;\r\n",
-				(int)gam,ost(gam),(int)R,ost(R), (int)V,ost(V), (int)L,ost(L), (int)C,ost(C));
-		sprintf(str2,"gfl:%d.%d; gfr:%d.%d; grl:%d.%d; grr:%d.%d;\r\n",
-				(int)gfl,ost(gfl),(int)gfr,ost(gfr), (int)grl,ost(grl), (int)grr,ost(grr));
-		sprintf(str3,"Vfl:%d.%d; Vfr:%d.%d; Vrl:%d.%d; Vrr:%d.%d;\r\n",
-				(int)Vfl,ost(Vfl),(int)Vfr,ost(Vfr), (int)Vrl,ost(Vrl), (int)Vrr,ost(Vrr));
-		sprintf(str4,"a1:%d; c1:%d;\r\n",
-				(int)pwm_aim_ch1,(int)pwm_count_ch1);
-		//print_data(vel_mean, dir_mean, rx_mean, ry_mean);
-		//send_str(str1);
-		send_str(str2);
-		send_str(str3);
-		send_str(str4);*/
 }
 
 void normaliz(){
@@ -654,7 +635,8 @@ void normaliz(){
 	R=R*2;
 	d_rx=(rx_mean-rx_period_mean);
 	if (fabs(d_rx)<10) d_rx=0;
-	V=(d_vel)*k_vel/vel_period_max*(d_rx/rx_period_max);
+	absVel=(d_vel)/vel_period_max*(d_rx/rx_period_max);  
+	V=absVel*k_vel;
 	d_ry=ry_mean-ry_period_mean;
 	if (fabs(d_ry)<20) d_ry=0;
 	gam=pi*(d_ry)/ry_period_max;

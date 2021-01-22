@@ -9,6 +9,7 @@ double echo_filter[12];
 char pack;
 int pduTimer;
 int echo_count;
+uint8_t sensFlag[4]={0,0,0,0};
 void tim1Init(void)
 {
 	RCC->AHB1ENR|=RCC_AHB1ENR_GPIOEEN;
@@ -16,7 +17,7 @@ void tim1Init(void)
 	GPIOE->AFR[1]|=(1<<4)|(1<<12)|(1<<20);//AF1 enable
 		RCC->APB2ENR |= RCC_APB2ENR_TIM1EN;
 	TIM1->CCER = 0;
-	TIM1->ARR = 5000;
+	TIM1->ARR = 4000;
 	TIM1->PSC = 1680-1;
 	TIM1->BDTR |= TIM_BDTR_MOE;
 	TIM1->CCMR1 |= TIM_CCMR1_OC1M_1 | TIM_CCMR1_OC1M_2;
@@ -87,10 +88,6 @@ void tim4Init(void)
 	TIM4->CCMR2 |= TIM_CCMR2_OC4M_1 | TIM_CCMR2_OC4M_2;
 	TIM4->CCER |= TIM_CCER_CC4E;
 	TIM4->CR1 |= TIM_CR1_CEN;
-	/*TIM4->CCR1=50;
-	TIM4->CCR2=50;
-	TIM4->CCR3=50;
-	TIM4->CCR4=50;*/
 }
 
 void tim5Init(void)
@@ -100,7 +97,7 @@ void tim5Init(void)
 	GPIOA->AFR[0]|=(2<<0)|(2<<4)|(2<<8)|(2<<12);
 	RCC->APB1ENR|=RCC_APB1ENR_TIM5EN;//???????? ???????????? ???????-???????? 9
 	TIM5->PSC=1680-1;//???????? ?? 10???
-	TIM5->ARR=5000;//??????? ?? ?????
+	TIM5->ARR=4000;//??????? ?? ?????
 	//????? 1
 	TIM5->CCMR1|=1|(1<<8);
 	//????? 3
@@ -119,6 +116,7 @@ void tim5Init(void)
 	TIM5->DIER|=TIM_DIER_CC2IE;
 	TIM5->DIER|=TIM_DIER_CC3IE;
 	TIM5->DIER|=TIM_DIER_CC4IE;
+	TIM5->DIER|=TIM_DIER_UIE;
 	
 	NVIC_EnableIRQ(TIM5_IRQn);
 }
@@ -143,39 +141,17 @@ void tim8Init(void)
 	TIM8->CCMR2 |= TIM_CCMR2_OC4M_1 | TIM_CCMR2_OC4M_2;
 	TIM8->CCER |= TIM_CCER_CC4E;
 	TIM8->CR1 |= TIM_CR1_CEN;
-	/*TIM8->CCR1=50;
-	TIM8->CCR2=50;
-	TIM8->CCR3=50;
-	TIM8->CCR4=50;*/
 }
 
 void tim6Init(void)
 {
 	RCC->APB1ENR|=RCC_APB1ENR_TIM6EN;
 	TIM6->PSC=16800;
-	TIM6->ARR=99;
+	TIM6->ARR=9;
 	TIM6->DIER|=TIM_DIER_UIE;
 	NVIC_EnableIRQ(TIM6_DAC_IRQn);
 	TIM6->CR1|=TIM_CR1_CEN;
 }
-
-
-/*void send_to_uart(uint16_t data)
-{
-	while(!(USART2->SR & USART_SR_TC));
-	USART2->DR=data;
-}
-
-//������� ���������� ������ � UART, �� ���� ��������� �� ����� � send_to_uart
-void send_str(char * string)
-{
-	int i=0;
-	while(string[i])
-	{
-		send_to_uart(string[i]);
-		i++;
-	}
-}*/
 
 double sign(double a){
 	if (a>0) return 1;
@@ -196,81 +172,55 @@ long map(long x,long inMin,long inMax,long outMin, long outMax)
 	return (((x-inMin)*(outMax-outMin)/(inMax-inMin))+outMin);
 }
 
-/*void uart3Init(uint32_t coreFreq, uint32_t baudRate)
-{
-	//PB10-TX
-	//PB11-RX
-	RCC->AHB1ENR|=RCC_AHB1ENR_GPIOBEN;//Включить тактирвание порта B
-	RCC->APB1ENR|=RCC_APB1ENR_USART3EN;//Включить тактирование UART3
-	GPIOB->MODER|=GPIO_MODER_MODE10_1 | GPIO_MODER_MODE11_1;//PB10,PB11 в режим альтернативной функции
-	GPIOB->AFR[1]|=7<<8 | 7<<12;//Включить AF7
-	GPIOB->PUPDR|=GPIO_PUPDR_PUPD11_0;//PB11 Pull up
-	USART3->CR1 = 0;//Сбрасываем конфигурацию
-	USART3->CR1|=USART_CR1_RE|USART_CR1_TE;//Включить приём и передачу
-	USART3->BRR|=coreFreq/(baudRate);//Скорость работы uart
-	NVIC_EnableIRQ(USART3_IRQn);
-	USART3->CR1|=USART_CR1_UE;//Включить uart
-}
-
-void uart2Init(uint32_t coreFreq, uint32_t baudRate)
-{
-	//PD5-TX
-	//PD6-RX
-	RCC->AHB1ENR|=RCC_AHB1ENR_GPIODEN;//Включить тактирвание порта D
-	RCC->APB1ENR|=RCC_APB1ENR_USART2EN;//Включить тактирование UART2
-	GPIOD->MODER|=GPIO_MODER_MODE5_1 | GPIO_MODER_MODE6_1;//PD5,6 в режим альтернативной функции
-	GPIOD->AFR[0]|=(7<<20)|(7<<24);//Включить AF7
-	GPIOD->PUPDR|=GPIO_PUPDR_PUPD6_0;//PD6 Pull up
-	USART2->CR1 = 0;//Сбрасываем конфигурацию
-	USART2->CR1|=USART_CR1_RE|USART_CR1_TE;//Включить приём и передачу
-	USART2->BRR|=coreFreq/(baudRate);//Скорость работы uart
-	NVIC_EnableIRQ(USART2_IRQn);
-	USART2->CR1|=USART_CR1_UE;//Включить uart
-}
-
-void USART2_IRQHandler(void)
-{
-	if(USART2->SR & USART_SR_RXNE)
-	{
-		frameBuff[reciveStatus]=USART2->DR;
-		if (reciveStatus==0)reciveStatus=1;
-		else reciveStatus=1;
-	}
-}
-
-void USART3_IRQHandler(void)
-{
-	if(USART3->SR & USART_SR_RXNE)
-	{
-		frameBuff[reciveStatus]=USART3->DR;
-		reciveStatus++;
-	}
-}*/
-
 void TIM5_IRQHandler(void){
 	double a;
+	if (TIM5->SR & TIM_SR_UIF)  {
+		TIM5->SR &=~ TIM_SR_UIF;
+		if(sensFlag[0]!=1)
+		{
+			echo_filter[echo_count+0]=500;
+			sensFlag[0]=1;
+		}
+		if(sensFlag[1]!=1)
+		{
+			echo_filter[echo_count+3]=500;
+			sensFlag[1]=1;
+		}
+		if(sensFlag[2]!=1)
+		{
+			echo_filter[echo_count+6]=500;
+			sensFlag[2]=1;
+		}
+		if(sensFlag[3]!=1)
+		{
+			echo_filter[echo_count+9]=500;
+			sensFlag[3]=1;
+		}
+		
+	}
 	if (TIM5->SR & TIM_SR_CC1IF){
 		TIM5->SR &=~TIM_SR_CC1IF;
 		if (TIM5->CCR1>start_mes) echo_filter[echo_count+0] = (TIM5->CCR1-start_mes)/58 *10-20;
-		//else echo_mes[pack+0]=1000;
+		sensFlag[0]=1;
 	}
 	if (TIM5->SR & TIM_SR_CC2IF){
 		TIM5->SR &=~TIM_SR_CC2IF;
 		if (TIM5->CCR2>start_mes) echo_filter[echo_count+3] = (TIM5->CCR2-start_mes)/58 *10-20;
-		//else echo_mes[pack+3]=1000;
+		sensFlag[1]=1;
 	}
 	if (TIM5->SR & TIM_SR_CC3IF){
 		TIM5->SR &=~TIM_SR_CC3IF;
 		if (TIM5->CCR3>start_mes) echo_filter[echo_count+6] = (TIM5->CCR3-start_mes)/58 *10-20;
-		//else echo_mes[pack+6]=1000;
-	}
+		sensFlag[2]=1;
+	}      
 	if (TIM5->SR & TIM_SR_CC4IF){
 		TIM5->SR &=~TIM_SR_CC4IF;
 		if (TIM5->CCR4>start_mes) echo_filter[echo_count+9] = (TIM5->CCR4-start_mes)/58 *10-20;
-		//else echo_mes[pack+9]=1000;
+		sensFlag[3]=1;
 	}
+		
 }
-double med_filt(double* echo_filter, char package){
+double med_filt(char package){
 	double middle;
 	double a=echo_filter[0+package];
 	double b=echo_filter[1+package];
@@ -292,14 +242,18 @@ void TIM1_CC_IRQHandler(void){
 		TIM1->SR &=~ TIM_SR_CC2IF;
 		TIM1->SR &=~ TIM_SR_CC3IF;
 		TIM1->SR &=~ TIM_SR_UIF;
-		start_mes=TIM5->CNT;
 		//UPD();
-		//tim5Init();
-		if (echo_count>2){
-			echo_mes[pack+0]=med_filt(echo_filter, 0);
-			echo_mes[pack+3]=med_filt(echo_filter, 3);
-			echo_mes[pack+6]=med_filt(echo_filter, 6);
-			echo_mes[pack+9]=med_filt(echo_filter, 9);
+		tim5Init();
+		sensFlag[0]=0;
+		sensFlag[1]=0;
+		sensFlag[2]=0;
+		sensFlag[3]=0;
+		start_mes=TIM5->CNT;
+		if (echo_count>1){
+			echo_mes[pack+0]=med_filt(0)-20;
+			echo_mes[pack+3]=med_filt(3);
+			echo_mes[pack+6]=med_filt(6);
+			echo_mes[pack+9]=med_filt(9);
 			echo_count=0;
 			switch (pack){
 				case 0:		

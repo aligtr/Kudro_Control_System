@@ -19,6 +19,7 @@ int main(void)
 {
 	uint16_t temp;
 	uint16_t gamTemp;
+	uint8_t timerEnableFlag=1;
 	RccClockInit();
 	tim4Init();
 	tim2Init();
@@ -34,10 +35,27 @@ int main(void)
 	uart2Init(84000000,115200);
   while (1)
   {
-		if(pduTimer>50)
+		if(pduTimer>200)
 		{
-			//mode = frameBuff[2];
+			mode = frameBuff[2];
 			mode =1;
+			if(mode!=1 && timerEnableFlag==1)
+			{
+				TIM1->CR1&=~TIM_CR1_CEN;
+				TIM5->CR1&=~TIM_CR1_CEN;
+				NVIC_DisableIRQ(TIM1_CC_IRQn);
+				NVIC_DisableIRQ(TIM5_IRQn);
+				timerEnableFlag=0;
+			}
+			else if(timerEnableFlag==0 && mode==1)
+			{
+				TIM1->CR1|=TIM_CR1_CEN;
+				TIM5->CR1|=TIM_CR1_CEN;
+				NVIC_EnableIRQ(TIM1_CC_IRQn);
+				NVIC_EnableIRQ(TIM5_IRQn);
+				timerEnableFlag=1;
+			}
+			
 			pduTimer=0;
 				gam=-1*((uint16_t)(frameBuff[0]+(frameBuff[1]<<8))-180);
 				//9,10,11
@@ -138,10 +156,13 @@ int main(void)
 					echo_angle[6]=30+45;
 					echo_mes[6]=1000;
 				}
-				for(war=50;war<400;war+=20){
+				for(war=0;war<450;war+=20){
 					if (echo_mes[0]<war||echo_mes[1]<war||echo_mes[2]<war||echo_mes[3]<war||echo_mes[4]<war||echo_mes[5]<war||
 							echo_mes[6]<war||echo_mes[7]<war||echo_mes[8]<war||echo_mes[9]<war||echo_mes[10]<war||echo_mes[11]<war){
-								temp=(war<400) ? (uint16_t)(war/10-5) : (uint16_t)10;
+								if(war>40)
+									temp=(war<400) ? (uint16_t)(war/80) : (uint16_t)5;
+								else 
+									temp=0;
 								uartTransmitt(0x0B,USART2);
 								uartTransmittBuff((uint8_t*)&temp,2,USART2);
 						break;
@@ -160,7 +181,8 @@ int main(void)
 				TIM8->CCR1=deg_to_pwm(echo_angle[8]);//9
 				TIM8->CCR2=deg_to_pwm(echo_angle[9]);//10
 				TIM8->CCR3=deg_to_pwm(echo_angle[10]);//11
-				TIM8->CCR4=deg_to_pwm(echo_angle[11]);//12					
+				TIM8->CCR4=deg_to_pwm(echo_angle[11]);//12	
+				
 		}
 		animationLoop();		
   }

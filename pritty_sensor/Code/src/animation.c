@@ -30,68 +30,88 @@ void animationInit(void)
 void animationLoop(void)
 {
 	static uint8_t blinkState=0;
-	   static uint8_t blinkState1=0;
+	static uint8_t blinkState1=0;
 	static uint8_t redBlink=0;
+	static uint16_t hueAnimation=0;
+	static uint8_t hueDir=0;
 	if(mode==0)
 	{
 		if(blinkTimer1>500)
 		{
 			if(blinkState1==0)
 				{
-					ledSetBlockHSV(0,88,12,255,255);
+					ledSetBlockRGB(0,88,255,100,0);
 					blinkState1=1;
 				}
 				else
 				{
-					ledSetBlockHSV(0,88,255,255,0);
+					ledSetBlockRGB(0,88,0,0,0);
 					blinkState1=0;
 				}
 				blinkTimer1=0;
+				ledUpdate();
 		}
 	}
-
-	if(redBlink && blinkTimer>200 && (mode==1 || mode==2))
+	else if(redBlink && blinkTimer>200 && (mode==1))
 	{
-		/*if(blinkState==0)
+		if(blinkState==0)
 		{
-			ledSetBlockHSV(0,88,0,255,255);
+			ledSetBlockRGB(0,88,255,0,0);
 			blinkState=1;
 		}
 		else
 		{
-			ledSetBlockHSV(0,88,255,255,0);
+			ledSetBlockRGB(0,88,0,0,0);
 			blinkState=0;
 		}
-		blinkTimer=0;*/
+		blinkTimer=0;
+		ledUpdate();
 	}
-	if(updateTimer>30)
+	else if((mode==1) ? updateTimer>100 : updateTimer>20)
 	{
-		if(mode==1 || mode==2)
+		if(mode==1)
 		{
-			if(war>=40)
+			if(war>40)
 			{
 				redBlink=0;
 				//rangeIndication(0,88,war,400,40);
-				rangeIndication(0,5,(uint16_t)echo_mes[10],400,50);//10
-				rangeIndication(5,7,(uint16_t)echo_mes[11],400,50);//11
-				rangeIndication(12,6,(uint16_t)echo_mes[0],400,50);//0
-				rangeIndication(18,6,(uint16_t)echo_mes[1],400,50);//1
-				rangeIndication(24,6,(uint16_t)echo_mes[2],400,50);//2
-				rangeIndication(30,7,(uint16_t)echo_mes[3],400,50);//3
-				rangeIndication(37,7,(uint16_t)echo_mes[4],400,50);//5
-				rangeIndication(44,7,(uint16_t)echo_mes[5],400,50);//6
-				rangeIndication(51,7,(uint16_t)echo_mes[6],400,50);//6
-				rangeIndication(58,6,(uint16_t)echo_mes[7],400,50);//7
-				rangeIndication(64,7,(uint16_t)echo_mes[8],400,50);//8
-				rangeIndication(71,8,(uint16_t)echo_mes[9],400,50);//9
+				rangeIndication(0,5,(uint16_t)echo_mes[10],450,50);//10
+				rangeIndication(5,7,(uint16_t)echo_mes[11],450,50);//11
+				rangeIndication(12,6,(uint16_t)echo_mes[0],450,50);//0
+				rangeIndication(18,6,(uint16_t)echo_mes[1],450,50);//1
+				rangeIndication(24,6,(uint16_t)echo_mes[2],450,50);//2
+				rangeIndication(30,7,(uint16_t)echo_mes[3],450,50);//3
+				rangeIndication(37,7,(uint16_t)echo_mes[4],450,50);//5
+				rangeIndication(44,7,(uint16_t)echo_mes[5],450,50);//6
+				rangeIndication(51,7,(uint16_t)echo_mes[6],450,50);//6
+				rangeIndication(58,6,(uint16_t)echo_mes[7],450,50);//7
+				rangeIndication(64,7,(uint16_t)echo_mes[8],450,50);//8
+				rangeIndication(71,8,(uint16_t)echo_mes[9],450,50);//9
 			}
 			else
 			{
 				redBlink=1;
+				return;
 			}	
 		}
-		updateTimer=0;
+		else if(mode==2 || mode==3)
+		{
+			ledSetBlockHSV(0,79,hueAnimation,255,255);
+			if(hueAnimation==359)
+			{
+					hueDir=1;
+			}
+			else if(hueAnimation==0)
+			{
+				hueDir=0;
+			}
+			if(hueDir)
+				hueAnimation--;
+			else
+				hueAnimation++;
+		}
 		ledUpdate();
+		updateTimer=0;
 	}
 }
 

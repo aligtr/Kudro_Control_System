@@ -1,5 +1,5 @@
 #include "main.h"
-#include "pdu.h"
+#include "pdu.h" 
 
 __INLINE void allMotorInit(void);
 void allMotorStart(void);
@@ -11,6 +11,9 @@ void allMotorFaultAck(void);
 void reset(void);
 void interruptInit(void);
 void servoInit(void);
+void dangerStop(void);
+
+extern uint16_t constract;
 motor_t motorFrontLeft=
 {
 	USART1,
@@ -65,6 +68,7 @@ extern int smt_src3;
 extern uint16_t wheel_pos[4];
 extern char adc_flag;
 extern char wheel_flag[4];
+
 extern void TIM6_DAC_IRQHandler(void)
 {
 	if(TIM6->SR & TIM_SR_UIF)
@@ -301,7 +305,25 @@ int main()
 			}
 			if(smt_src3>700 && motorState==1)
 			{
-				kinematica();
+				if(constract==0 && mode==1)
+				{
+					getSpeed(motorFrontLeft.UART,&motorFrontLeft.measureSpeed);
+					getSpeed(motorFrontRight.UART,&motorFrontRight.measureSpeed);
+					getSpeed(motorRearLeft.UART,&motorRearLeft.measureSpeed);
+					getSpeed(motorRearRight.UART,&motorRearRight.measureSpeed);
+					
+				}
+				if(mode==1 && constract==0 && (motorFrontLeft.measureSpeed!=0 || motorFrontRight.measureSpeed!=0 || motorRearLeft.measureSpeed!=0 || motorRearRight.measureSpeed!=0))
+				{
+						Vfl=-1*motorFrontLeft.measureSpeed*(6.28*MOTOR_RADIUS)/60;
+						Vfr=-1*motorFrontRight.measureSpeed*(6.28*MOTOR_RADIUS)/60;
+						Vrl=-1*motorRearLeft.measureSpeed*(6.28*MOTOR_RADIUS)/60;
+						Vrr=-1*motorRearRight.measureSpeed*(6.28*MOTOR_RADIUS)/60;
+				}
+				else
+				{
+					kinematica();
+				}
 				allMotorChangeSpeed();
 			}
 			
