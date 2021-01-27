@@ -32,17 +32,6 @@ void DMA1_Stream4_IRQHandler(void)
 	TIM10->CR1|=TIM_CR1_CEN;//Включить таймер
 }
 
-void TIM1_UP_TIM10_IRQHandler(void)
-{
-	if((TIM10->SR &TIM_SR_UIF)!=0)
-	{
-		TIM10->SR&=~TIM_SR_UIF;//Сброс флага прерывания
-		TIM10->CR1 &= ~(TIM_CR1_CEN); //останавливаем таймер
-		TIM10->DIER &= ~(TIM_DIER_UIE); //запрещаем прерывание таймера
-		idleFlag=0;
-	}
-}
-
 void ledInit(void)
 {
 	RCC->APB1ENR|=RCC_APB1ENR_TIM3EN;//Тактирование таймера 3

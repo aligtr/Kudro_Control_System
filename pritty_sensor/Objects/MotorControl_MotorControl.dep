@@ -1,7 +1,7 @@
 Dependencies for Project 'MotorControl', Target 'MotorControl': (DO NOT MODIFY !)
 CompilerVersion: 5060750::V5.06 update 6 (build 750)::.\ARMCC
-F (.\Code\src\main.c)(0x600AFB69)(-c --cpu Cortex-M4.fp.sp -D__EVAL -g -O0 --apcs=interwork --split_sections -I ..\MotorControl -I .\Lib\inc -I .\Code\inc-I.\RTE\_MotorControl-IC:\Users\ba123\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ba123\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F407xx -D_RTE_-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
-I (.\Code\inc\main.h)(0x6001AB05)
+F (.\Code\src\main.c)(0x60119584)(-c --cpu Cortex-M4.fp.sp -D__EVAL -g -O0 --apcs=interwork --split_sections -I ..\MotorControl -I .\Lib\inc -I .\Code\inc-I.\RTE\_MotorControl-IC:\Users\ba123\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ba123\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F407xx -D_RTE_-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
+I (.\Code\inc\main.h)(0x600AA9E8)
 I (C:\Users\ba123\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f407xx.h)(0x5C5BD672)
 I (C:\Users\ba123\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\core_cm4.h)(0x5E8F1772)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E5396AC)
@@ -10,20 +10,20 @@ I (C:\Users\ba123\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cms
 I (C:\Users\ba123\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cmsis_armcc.h)(0x5E8F1772)
 I (C:\Users\ba123\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\mpu_armv7.h)(0x5E8F1772)
 I (C:\Users\ba123\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\system_stm32f4xx.h)(0x5C5BD672)
-I (.\Lib\inc\rcc.h)(0x6001AB05)
-I (.\Lib\inc\delay.h)(0x6001AB05)
-I (.\Lib\inc\bsp.h)(0x6001AB05)
-I (.\Lib\inc\MCP.h)(0x6001AB05)
+I (.\Lib\inc\rcc.h)(0x600AA9E8)
+I (.\Lib\inc\delay.h)(0x600AA9E8)
+I (.\Lib\inc\bsp.h)(0x600AA9E8)
+I (.\Lib\inc\MCP.h)(0x600AA9E8)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5E5396AC)
-I (.\Lib\inc\MotorControl.h)(0x6001AB05)
-I (.\Lib\inc\encoder.h)(0x6001AB05)
+I (.\Lib\inc\MotorControl.h)(0x600AA9E8)
+I (.\Lib\inc\encoder.h)(0x600AA9E8)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5E5396AC)
-I (.\Code\inc\pdu.h)(0x600B125D)
-I (.\Lib\inc\LedControl.h)(0x6001AB05)
-I (.\Code\inc\animation.h)(0x6001AB05)
+I (.\Code\inc\pdu.h)(0x600AA9E8)
+I (.\Lib\inc\LedControl.h)(0x600AA9E8)
+I (.\Code\inc\animation.h)(0x600AA9E8)
 I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x5E5396AA)
-F (.\Code\src\pdu.c)(0x600B155A)(-c --cpu Cortex-M4.fp.sp -D__EVAL -g -O0 --apcs=interwork --split_sections -I ..\MotorControl -I .\Lib\inc -I .\Code\inc-I.\RTE\_MotorControl-IC:\Users\ba123\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ba123\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F407xx -D_RTE_-o .\objects\pdu.o --omf_browse .\objects\pdu.crf --depend .\objects\pdu.d)
-I (.\Code\inc\pdu.h)(0x600B125D)
+F (.\Code\src\pdu.c)(0x60119C58)(-c --cpu Cortex-M4.fp.sp -D__EVAL -g -O0 --apcs=interwork --split_sections -I ..\MotorControl -I .\Lib\inc -I .\Code\inc-I.\RTE\_MotorControl-IC:\Users\ba123\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ba123\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F407xx -D_RTE_-o .\objects\pdu.o --omf_browse .\objects\pdu.crf --depend .\objects\pdu.d)
+I (.\Code\inc\pdu.h)(0x600AA9E8)
 I (C:\Users\ba123\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f407xx.h)(0x5C5BD672)
 I (C:\Users\ba123\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\core_cm4.h)(0x5E8F1772)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E5396AC)
@@ -32,8 +32,8 @@ I (C:\Users\ba123\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cms
 I (C:\Users\ba123\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cmsis_armcc.h)(0x5E8F1772)
 I (C:\Users\ba123\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\mpu_armv7.h)(0x5E8F1772)
 I (C:\Users\ba123\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\system_stm32f4xx.h)(0x5C5BD672)
-F (.\Code\src\animation.c)(0x600AF779)(-c --cpu Cortex-M4.fp.sp -D__EVAL -g -O0 --apcs=interwork --split_sections -I ..\MotorControl -I .\Lib\inc -I .\Code\inc-I.\RTE\_MotorControl-IC:\Users\ba123\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ba123\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F407xx -D_RTE_-o .\objects\animation.o --omf_browse .\objects\animation.crf --depend .\objects\animation.d)
-I (.\Code\inc\animation.h)(0x6001AB05)
+F (.\Code\src\animation.c)(0x600AA9E8)(-c --cpu Cortex-M4.fp.sp -D__EVAL -g -O0 --apcs=interwork --split_sections -I ..\MotorControl -I .\Lib\inc -I .\Code\inc-I.\RTE\_MotorControl-IC:\Users\ba123\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ba123\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F407xx -D_RTE_-o .\objects\animation.o --omf_browse .\objects\animation.crf --depend .\objects\animation.d)
+I (.\Code\inc\animation.h)(0x600AA9E8)
 I (C:\Users\ba123\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f407xx.h)(0x5C5BD672)
 I (C:\Users\ba123\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\core_cm4.h)(0x5E8F1772)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E5396AC)
@@ -42,11 +42,11 @@ I (C:\Users\ba123\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cms
 I (C:\Users\ba123\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cmsis_armcc.h)(0x5E8F1772)
 I (C:\Users\ba123\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\mpu_armv7.h)(0x5E8F1772)
 I (C:\Users\ba123\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\system_stm32f4xx.h)(0x5C5BD672)
-I (.\Lib\inc\LedControl.h)(0x6001AB05)
-I (.\Lib\inc\delay.h)(0x6001AB05)
+I (.\Lib\inc\LedControl.h)(0x600AA9E8)
+I (.\Lib\inc\delay.h)(0x600AA9E8)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5E5396AC)
-F (.\Lib\src\delay.c)(0x6001AB05)(-c --cpu Cortex-M4.fp.sp -D__EVAL -g -O0 --apcs=interwork --split_sections -I ..\MotorControl -I .\Lib\inc -I .\Code\inc-I.\RTE\_MotorControl-IC:\Users\ba123\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ba123\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F407xx -D_RTE_-o .\objects\delay.o --omf_browse .\objects\delay.crf --depend .\objects\delay.d)
-I (.\Lib\inc\delay.h)(0x6001AB05)
+F (.\Lib\src\delay.c)(0x600AA9E8)(-c --cpu Cortex-M4.fp.sp -D__EVAL -g -O0 --apcs=interwork --split_sections -I ..\MotorControl -I .\Lib\inc -I .\Code\inc-I.\RTE\_MotorControl-IC:\Users\ba123\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ba123\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F407xx -D_RTE_-o .\objects\delay.o --omf_browse .\objects\delay.crf --depend .\objects\delay.d)
+I (.\Lib\inc\delay.h)(0x600AA9E8)
 I (C:\Users\ba123\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f407xx.h)(0x5C5BD672)
 I (C:\Users\ba123\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\core_cm4.h)(0x5E8F1772)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E5396AC)
@@ -55,8 +55,8 @@ I (C:\Users\ba123\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cms
 I (C:\Users\ba123\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cmsis_armcc.h)(0x5E8F1772)
 I (C:\Users\ba123\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\mpu_armv7.h)(0x5E8F1772)
 I (C:\Users\ba123\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\system_stm32f4xx.h)(0x5C5BD672)
-F (.\Lib\src\rcc.c)(0x6001AB05)(-c --cpu Cortex-M4.fp.sp -D__EVAL -g -O0 --apcs=interwork --split_sections -I ..\MotorControl -I .\Lib\inc -I .\Code\inc-I.\RTE\_MotorControl-IC:\Users\ba123\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ba123\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F407xx -D_RTE_-o .\objects\rcc.o --omf_browse .\objects\rcc.crf --depend .\objects\rcc.d)
-I (.\Lib\inc\rcc.h)(0x6001AB05)
+F (.\Lib\src\rcc.c)(0x600AA9E8)(-c --cpu Cortex-M4.fp.sp -D__EVAL -g -O0 --apcs=interwork --split_sections -I ..\MotorControl -I .\Lib\inc -I .\Code\inc-I.\RTE\_MotorControl-IC:\Users\ba123\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ba123\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F407xx -D_RTE_-o .\objects\rcc.o --omf_browse .\objects\rcc.crf --depend .\objects\rcc.d)
+I (.\Lib\inc\rcc.h)(0x600AA9E8)
 I (C:\Users\ba123\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f407xx.h)(0x5C5BD672)
 I (C:\Users\ba123\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\core_cm4.h)(0x5E8F1772)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E5396AC)
@@ -65,8 +65,8 @@ I (C:\Users\ba123\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cms
 I (C:\Users\ba123\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cmsis_armcc.h)(0x5E8F1772)
 I (C:\Users\ba123\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\mpu_armv7.h)(0x5E8F1772)
 I (C:\Users\ba123\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\system_stm32f4xx.h)(0x5C5BD672)
-F (.\Lib\src\LedControl.c)(0x6001AB05)(-c --cpu Cortex-M4.fp.sp -D__EVAL -g -O0 --apcs=interwork --split_sections -I ..\MotorControl -I .\Lib\inc -I .\Code\inc-I.\RTE\_MotorControl-IC:\Users\ba123\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ba123\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F407xx -D_RTE_-o .\objects\ledcontrol.o --omf_browse .\objects\ledcontrol.crf --depend .\objects\ledcontrol.d)
-I (.\Lib\inc\LedControl.h)(0x6001AB05)
+F (.\Lib\src\LedControl.c)(0x60115C5D)(-c --cpu Cortex-M4.fp.sp -D__EVAL -g -O0 --apcs=interwork --split_sections -I ..\MotorControl -I .\Lib\inc -I .\Code\inc-I.\RTE\_MotorControl-IC:\Users\ba123\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ba123\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F407xx -D_RTE_-o .\objects\ledcontrol.o --omf_browse .\objects\ledcontrol.crf --depend .\objects\ledcontrol.d)
+I (.\Lib\inc\LedControl.h)(0x600AA9E8)
 I (C:\Users\ba123\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f407xx.h)(0x5C5BD672)
 I (C:\Users\ba123\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\core_cm4.h)(0x5E8F1772)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E5396AC)
@@ -75,10 +75,10 @@ I (C:\Users\ba123\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cms
 I (C:\Users\ba123\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cmsis_armcc.h)(0x5E8F1772)
 I (C:\Users\ba123\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\mpu_armv7.h)(0x5E8F1772)
 I (C:\Users\ba123\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\system_stm32f4xx.h)(0x5C5BD672)
-I (.\Lib\inc\delay.h)(0x6001AB05)
+I (.\Lib\inc\delay.h)(0x600AA9E8)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5E5396AC)
-F (.\Lib\src\bsp.c)(0x6001AB05)(-c --cpu Cortex-M4.fp.sp -D__EVAL -g -O0 --apcs=interwork --split_sections -I ..\MotorControl -I .\Lib\inc -I .\Code\inc-I.\RTE\_MotorControl-IC:\Users\ba123\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ba123\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F407xx -D_RTE_-o .\objects\bsp.o --omf_browse .\objects\bsp.crf --depend .\objects\bsp.d)
-I (.\Lib\inc\bsp.h)(0x6001AB05)
+F (.\Lib\src\bsp.c)(0x600AA9E8)(-c --cpu Cortex-M4.fp.sp -D__EVAL -g -O0 --apcs=interwork --split_sections -I ..\MotorControl -I .\Lib\inc -I .\Code\inc-I.\RTE\_MotorControl-IC:\Users\ba123\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ba123\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F407xx -D_RTE_-o .\objects\bsp.o --omf_browse .\objects\bsp.crf --depend .\objects\bsp.d)
+I (.\Lib\inc\bsp.h)(0x600AA9E8)
 I (C:\Users\ba123\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f407xx.h)(0x5C5BD672)
 I (C:\Users\ba123\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\core_cm4.h)(0x5E8F1772)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5E5396AC)
@@ -87,11 +87,11 @@ I (C:\Users\ba123\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cms
 I (C:\Users\ba123\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\cmsis_armcc.h)(0x5E8F1772)
 I (C:\Users\ba123\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\mpu_armv7.h)(0x5E8F1772)
 I (C:\Users\ba123\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\system_stm32f4xx.h)(0x5C5BD672)
-I (.\Lib\inc\MCP.h)(0x6001AB05)
-I (.\Lib\inc\delay.h)(0x6001AB05)
+I (.\Lib\inc\MCP.h)(0x600AA9E8)
+I (.\Lib\inc\delay.h)(0x600AA9E8)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5E5396AC)
-F (RTE\Device\STM32F407VGTx\startup_stm32f407xx.s)(0x6001AB05)(--cpu Cortex-M4.fp.sp --pd "__EVAL SETA 1" -g --apcs=interwork -I.\RTE\_MotorControl-IC:\Users\ba123\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ba123\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include--pd "__UVISION_VERSION SETA 530" --pd "_RTE_ SETA 1" --pd "STM32F407xx SETA 1" --pd "_RTE_ SETA 1"--list .\listings\startup_stm32f407xx.lst --xref -o .\objects\startup_stm32f407xx.o --depend .\objects\startup_stm32f407xx.d)
-F (RTE\Device\STM32F407VGTx\system_stm32f4xx.c)(0x6001AB05)(-c --cpu Cortex-M4.fp.sp -D__EVAL -g -O0 --apcs=interwork --split_sections -I ..\MotorControl -I .\Lib\inc -I .\Code\inc-I.\RTE\_MotorControl-IC:\Users\ba123\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ba123\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F407xx -D_RTE_-o .\objects\system_stm32f4xx.o --omf_browse .\objects\system_stm32f4xx.crf --depend .\objects\system_stm32f4xx.d)
+F (RTE\Device\STM32F407VGTx\startup_stm32f407xx.s)(0x600AA9E8)(--cpu Cortex-M4.fp.sp --pd "__EVAL SETA 1" -g --apcs=interwork -I.\RTE\_MotorControl-IC:\Users\ba123\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ba123\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include--pd "__UVISION_VERSION SETA 530" --pd "_RTE_ SETA 1" --pd "STM32F407xx SETA 1" --pd "_RTE_ SETA 1"--list .\listings\startup_stm32f407xx.lst --xref -o .\objects\startup_stm32f407xx.o --depend .\objects\startup_stm32f407xx.d)
+F (RTE\Device\STM32F407VGTx\system_stm32f4xx.c)(0x600AA9E8)(-c --cpu Cortex-M4.fp.sp -D__EVAL -g -O0 --apcs=interwork --split_sections -I ..\MotorControl -I .\Lib\inc -I .\Code\inc-I.\RTE\_MotorControl-IC:\Users\ba123\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IC:\Users\ba123\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="530" -D_RTE_ -DSTM32F407xx -D_RTE_-o .\objects\system_stm32f4xx.o --omf_browse .\objects\system_stm32f4xx.crf --depend .\objects\system_stm32f4xx.d)
 I (C:\Users\ba123\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h)(0x5C5BD672)
 I (C:\Users\ba123\AppData\Local\Arm\Packs\Keil\STM32F4xx_DFP\2.14.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f407xx.h)(0x5C5BD672)
 I (C:\Users\ba123\AppData\Local\Arm\Packs\ARM\CMSIS\5.7.0\CMSIS\Core\Include\core_cm4.h)(0x5E8F1772)
