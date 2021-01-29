@@ -28,8 +28,19 @@ void DMA1_Stream4_IRQHandler(void)
 	DMA1->HIFCR=(DMA_HISR_TCIF4 | DMA_HISR_HTIF4 | DMA_HISR_FEIF4);
 	TIM3->CR1 &= ~(TIM_CR1_CEN); //останавливаем таймер
 	TIM3->CCR1=0;//Сбрасываем регистр сравнения
-	TIM10->DIER |= TIM_DIER_UIE; //прерывание по обновлению
-	TIM10->CR1|=TIM_CR1_CEN;//Включить таймер
+	TIM13->DIER |= TIM_DIER_UIE; //прерывание по обновлению
+	TIM13->CR1|=TIM_CR1_CEN;//Включить таймер
+}
+
+void TIM8_UP_TIM13_IRQHandler(void)
+{
+	if((TIM13->SR &TIM_SR_UIF)!=0)
+	{
+		TIM13->SR&=~TIM_SR_UIF;//Сброс флага прерывания
+		TIM13->CR1 &= ~(TIM_CR1_CEN); //останавливаем таймер
+		TIM13->DIER &= ~(TIM_DIER_UIE); //запрещаем прерывание таймера
+		idleFlag=0;
+	}
 }
 
 void ledInit(void)
@@ -37,7 +48,7 @@ void ledInit(void)
 	RCC->APB1ENR|=RCC_APB1ENR_TIM3EN;//Тактирование таймера 3
 	RCC->AHB1ENR|=RCC_AHB1ENR_GPIOAEN;//Тактирование порта A
 	RCC->AHB1ENR|=RCC_AHB1ENR_DMA1EN;//Тактирование DMA1
-	RCC->APB2ENR|=RCC_APB2ENR_TIM10EN;//Тактирование таймера 10
+	RCC->APB1ENR|=RCC_APB1ENR_TIM13EN;//Тактирование таймера 13
 	//GPIO setting
 	GPIOA->MODER|=GPIO_MODER_MODE6_1;//PA6в режим альтернативной функции
 	GPIOA->OSPEEDR|=GPIO_OSPEEDER_OSPEEDR6;//Высокая скорость порта PA6
@@ -52,10 +63,10 @@ void ledInit(void)
   TIM3->DIER |= TIM_DIER_CC1DE; //Разрешить запрос DMA
 	TIM3->CR2|=TIM_CR2_CCDS;
 	//Настройка таймера 10
-	TIM10->PSC=168;
-	TIM10->ARR=WAIT_TIME_US;
-	TIM10->CR1|=TIM_CR1_OPM;
-	TIM10->DIER|=TIM_DIER_UIE;
+	TIM13->PSC=168;
+	TIM13->ARR=WAIT_TIME_US;
+	TIM13->CR1|=TIM_CR1_OPM;
+	TIM13->DIER|=TIM_DIER_UIE;
 	//DMA settings
 	DMA1_Stream4->CR|=5<<DMA_SxCR_CHSEL_Pos//Выбор 5го канала ДМА 
 	| DMA_SxCR_PL//Высокий приоретет 
@@ -68,7 +79,7 @@ void ledInit(void)
 	DMA1_Stream4->M0AR=(uint32_t)&ledsBuff;//Адрес буфера
 	//Разрешаем обработку прерываний
   NVIC_EnableIRQ(DMA1_Stream4_IRQn); 
-	NVIC_EnableIRQ(TIM1_UP_TIM10_IRQn);
+	NVIC_EnableIRQ(TIM8_UP_TIM13_IRQn);
 	__enable_irq();
 	buffClear();
 }

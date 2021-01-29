@@ -108,8 +108,8 @@ void tim5Init(void)
 	GPIOA->MODER|=GPIO_MODER_MODE0_1|GPIO_MODER_MODE1_1|GPIO_MODER_MODE2_1|GPIO_MODER_MODE3_1;//PA0 ?? AF
 	GPIOA->AFR[0]|=(2<<0)|(2<<4)|(2<<8)|(2<<12);
 	RCC->APB1ENR|=RCC_APB1ENR_TIM5EN;//???????? ???????????? ???????-???????? 9
-	TIM5->PSC=1680-1;//???????? ?? 10???
-	TIM5->ARR=3000;//??????? ?? ?????
+	TIM5->PSC=168-1;//???????? ?? 10???
+	TIM5->ARR=40000;//??????? ?? ?????
 	//????? 1
 	TIM5->CCMR1|=1|(1<<8);
 	//????? 3
@@ -214,7 +214,7 @@ void TIM5_IRQHandler(void){
 	if (TIM5->SR & TIM_SR_CC1IF){
 		if (sensFlag[0]!=1 && recivePulseFlag[0]==1) 
 		{
-			echo_filter[echoState+0][senseCount] = (TIM5->CCR1-start_mes[0])/58.2*10;
+			echo_filter[echoState+0][senseCount] = (TIM5->CCR1-start_mes[0])/58.2-15;
 			sensFlag[0]=1;
 		}
 		if(recivePulseFlag[0]==0 && sensFlag[0]!=1)
@@ -228,7 +228,7 @@ void TIM5_IRQHandler(void){
 	if (TIM5->SR & TIM_SR_CC2IF){
 		if (sensFlag[1]!=1 && recivePulseFlag[1]==1)
 		{
-			echo_filter[echoState+3][senseCount] = (TIM5->CCR2-start_mes[1])/58.2*10;
+			echo_filter[echoState+3][senseCount] = (TIM5->CCR2-start_mes[1])/58.2;
 			sensFlag[1]=1;
 		}
 		if(recivePulseFlag[1]==0 && sensFlag[1]!=1)
@@ -242,7 +242,7 @@ void TIM5_IRQHandler(void){
 	if (TIM5->SR & TIM_SR_CC3IF){
 		if (sensFlag[2]!=1 && recivePulseFlag[2]==1) 
 		{
-			echo_filter[echoState+6][senseCount] = (TIM5->CCR3-start_mes[2])/58.2*10;
+			echo_filter[echoState+6][senseCount] = (TIM5->CCR3-start_mes[2])/58.2;
 			sensFlag[2]=1;
 		}
 		if(recivePulseFlag[2]==0 && sensFlag[2]!=1)
@@ -257,7 +257,7 @@ void TIM5_IRQHandler(void){
 	{
 		if (sensFlag[3]!=1 && recivePulseFlag[3]==1) 
 		{
-			echo_filter[echoState+9][senseCount] = (TIM5->CCR4-start_mes[3])/58.2*10;
+			echo_filter[echoState+9][senseCount] = (TIM5->CCR4-start_mes[3])/58.2;
 			sensFlag[3]=1;
 		}
 		if(recivePulseFlag[3]==0 && sensFlag[3]!=1)
@@ -296,7 +296,7 @@ void TIM5_IRQHandler(void){
 		TIM5->CR1&=~TIM_CR1_CEN;
 		TIM5->CNT=0;
 		TIM1->CNT=0;
-		TIM1->ARR=10000;
+		TIM1->ARR=5000;
 		NVIC_EnableIRQ(TIM1_UP_TIM10_IRQn);
 		TIM1->CR1|=TIM_CR1_CEN;
 	}
@@ -378,13 +378,6 @@ void TIM1_UP_TIM10_IRQHandler(void)
 				break;	
 		}
 		TIM1->SR &=~ TIM_SR_UIF;
-	}
-	if((TIM10->SR &TIM_SR_UIF)!=0)
-	{
-		TIM10->SR&=~TIM_SR_UIF;//Сброс флага прерывания
-		TIM10->CR1 &= ~(TIM_CR1_CEN); //останавливаем таймер
-		TIM10->DIER &= ~(TIM_DIER_UIE); //запрещаем прерывание таймера
-		idleFlag=0;
 	}
 }   
 

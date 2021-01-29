@@ -38,7 +38,7 @@ int main(void)
 		if(pduTimer>200)
 		{
 			mode = frameBuff[2];
-			mode =1;
+			//mode =1;
 			if(mode!=1 && timerEnableFlag==1)
 			{
 				TIM1->CR1&=~TIM_CR1_CEN;
