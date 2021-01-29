@@ -9,7 +9,7 @@ void tim4Init(void);
 void tim5Init(void);
 void tim6Init(void);
 void tim8Init(void);
-double med_filt(char pack);
+double med_filt(uint8_t sensor);
 double sign(double a);
 void send_to_uart(uint16_t data);
 void send_str(char * string);

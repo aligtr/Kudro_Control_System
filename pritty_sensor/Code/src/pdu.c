@@ -3,10 +3,10 @@
 //uint8_t reciveStatus;
 double gam;
 double echo_angle[12];
-double echo_mes[12];
-double start_mes[4]={0,0,0,0};
-double echo_filter[12];
-char pack=0;
+uint32_t echo_mes[12];
+uint32_t start_mes[4]={0,0,0,0};
+uint32_t echo_filter[12][4];
+uint8_t senseCount=0;
 int pduTimer;
 int echo_count=0;
 uint8_t sensFlag[4]={0,0,0,0};
@@ -108,8 +108,8 @@ void tim5Init(void)
 	GPIOA->MODER|=GPIO_MODER_MODE0_1|GPIO_MODER_MODE1_1|GPIO_MODER_MODE2_1|GPIO_MODER_MODE3_1;//PA0 ?? AF
 	GPIOA->AFR[0]|=(2<<0)|(2<<4)|(2<<8)|(2<<12);
 	RCC->APB1ENR|=RCC_APB1ENR_TIM5EN;//???????? ???????????? ???????-???????? 9
-	TIM5->PSC=168-1;//???????? ?? 10???
-	TIM5->ARR=40740;//??????? ?? ?????
+	TIM5->PSC=1680-1;//???????? ?? 10???
+	TIM5->ARR=3000;//??????? ?? ?????
 	//????? 1
 	TIM5->CCMR1|=1|(1<<8);
 	//????? 3
@@ -185,27 +185,28 @@ long map(long x,long inMin,long inMax,long outMin, long outMax)
 }
 
 void TIM5_IRQHandler(void){
+	uint8_t i;
 	if (TIM5->SR & TIM_SR_UIF)  
 	{
 		TIM5->SR &=~ TIM_SR_UIF;
 		if(sensFlag[0]!=1)
 		{
-			echo_mes[echoState+0]=700;
+			echo_filter[echoState+0][senseCount]=700;
 			sensFlag[0]=1;
 		}
 		if(sensFlag[1]!=1)
 		{
-			echo_mes[echoState+3]=700;
+			echo_filter[echoState+3][senseCount]=700;
 			sensFlag[1]=1;
 		}
 		if(sensFlag[2]!=1)
 		{
-			echo_mes[echoState+6]=700;
+			echo_filter[echoState+6][senseCount]=700;
 			sensFlag[2]=1;
 		}
 		if(sensFlag[3]!=1)
 		{
-			echo_mes[echoState+9]=700;
+			echo_filter[echoState+9][senseCount]=700;
 			sensFlag[3]=1;
 		}	
 	}
@@ -213,7 +214,7 @@ void TIM5_IRQHandler(void){
 	if (TIM5->SR & TIM_SR_CC1IF){
 		if (sensFlag[0]!=1 && recivePulseFlag[0]==1) 
 		{
-			echo_mes[echoState+0] = (TIM5->CCR1-start_mes[0])/58.2;
+			echo_filter[echoState+0][senseCount] = (TIM5->CCR1-start_mes[0])/58.2*10;
 			sensFlag[0]=1;
 		}
 		if(recivePulseFlag[0]==0 && sensFlag[0]!=1)
@@ -227,7 +228,7 @@ void TIM5_IRQHandler(void){
 	if (TIM5->SR & TIM_SR_CC2IF){
 		if (sensFlag[1]!=1 && recivePulseFlag[1]==1)
 		{
-			echo_mes[echoState+3] = (TIM5->CCR2-start_mes[1])/58.2;
+			echo_filter[echoState+3][senseCount] = (TIM5->CCR2-start_mes[1])/58.2*10;
 			sensFlag[1]=1;
 		}
 		if(recivePulseFlag[1]==0 && sensFlag[1]!=1)
@@ -241,7 +242,7 @@ void TIM5_IRQHandler(void){
 	if (TIM5->SR & TIM_SR_CC3IF){
 		if (sensFlag[2]!=1 && recivePulseFlag[2]==1) 
 		{
-			echo_mes[echoState+6] = (TIM5->CCR3-start_mes[2])/58.2;
+			echo_filter[echoState+6][senseCount] = (TIM5->CCR3-start_mes[2])/58.2*10;
 			sensFlag[2]=1;
 		}
 		if(recivePulseFlag[2]==0 && sensFlag[2]!=1)
@@ -256,7 +257,7 @@ void TIM5_IRQHandler(void){
 	{
 		if (sensFlag[3]!=1 && recivePulseFlag[3]==1) 
 		{
-			echo_mes[echoState+9] = (TIM5->CCR4-start_mes[3])/58.2;
+			echo_filter[echoState+9][senseCount] = (TIM5->CCR4-start_mes[3])/58.2*10;
 			sensFlag[3]=1;
 		}
 		if(recivePulseFlag[3]==0 && sensFlag[3]!=1)
@@ -270,7 +271,20 @@ void TIM5_IRQHandler(void){
 	if(sensFlag[0] && sensFlag[1] && sensFlag[2] && sensFlag[3])
 	{	
 		if(echoState!=2) echoState++;
-			else echoState=0;
+		else 
+		{
+			echoState=0;
+			if(senseCount==2)
+			{
+				senseCount=0;
+				for(i=0;i<12;i++)
+				{
+					echo_mes[i]=med_filt(i);
+				}
+			}
+			else
+				senseCount++;
+		}
 		recivePulseFlag[0]=0;
 		recivePulseFlag[1]=0;
 		recivePulseFlag[2]=0;
@@ -287,11 +301,11 @@ void TIM5_IRQHandler(void){
 		TIM1->CR1|=TIM_CR1_CEN;
 	}
 }
-double med_filt(char package){
-	double middle;
-	double a=echo_filter[0+package];
-	double b=echo_filter[1+package];
-	double c=echo_filter[2+package];
+double med_filt(uint8_t sensor){
+	uint32_t middle;
+	uint32_t a=echo_filter[sensor][0];
+	uint32_t b=echo_filter[sensor][1];
+	uint32_t c=echo_filter[sensor][2];
 	if ((a <= b) && (a <= c)) {
 		middle = (b <= c) ? b : c;
 	} else {
@@ -307,6 +321,7 @@ double med_filt(char package){
 void TIM1_UP_TIM10_IRQHandler(void)
 {
 	if ((TIM1->SR & TIM_SR_UIF)){
+		TIM1->CR1&=~TIM_CR1_CEN;
 		TIM1->ARR=10;
 		switch(echoState)
 		{
@@ -314,8 +329,6 @@ void TIM1_UP_TIM10_IRQHandler(void)
 				if(pulseState)
 				{
 					GPIOE->BSRR=GPIO_BSRR_BR9;
-					TIM5->CNT=0;
-					//start_mes=TIM5->CNT;
 					TIM5->CR1|=TIM_CR1_CEN;
 					pulseState=0;
 					NVIC_DisableIRQ(TIM1_UP_TIM10_IRQn);
@@ -325,6 +338,7 @@ void TIM1_UP_TIM10_IRQHandler(void)
 				{
 					GPIOE->BSRR=GPIO_BSRR_BS9;
 					TIM1->CNT=0;
+					TIM1->CR1|=TIM_CR1_CEN;
 					pulseState=1;
 				}
 				break;
@@ -332,8 +346,6 @@ void TIM1_UP_TIM10_IRQHandler(void)
 				if(pulseState)
 				{
 					GPIOE->BSRR=GPIO_BSRR_BR11;
-					TIM5->CNT=0;
-					//start_mes=TIM5->CNT;
 					TIM5->CR1|=TIM_CR1_CEN;
 					pulseState=0;
 					NVIC_DisableIRQ(TIM1_UP_TIM10_IRQn);
@@ -343,6 +355,7 @@ void TIM1_UP_TIM10_IRQHandler(void)
 				{
 					GPIOE->BSRR=GPIO_BSRR_BS11;
 					TIM1->CNT=0;
+					TIM1->CR1|=TIM_CR1_CEN;
 					pulseState=1;
 				}
 				break;
@@ -350,8 +363,6 @@ void TIM1_UP_TIM10_IRQHandler(void)
 				if(pulseState)
 				{
 					GPIOE->BSRR=GPIO_BSRR_BR13;
-					TIM5->CNT=0;
-					//start_mes=TIM5->CNT;
 					TIM5->CR1|=TIM_CR1_CEN;
 					pulseState=0;
 					NVIC_DisableIRQ(TIM1_UP_TIM10_IRQn);
@@ -361,50 +372,12 @@ void TIM1_UP_TIM10_IRQHandler(void)
 				{
 					GPIOE->BSRR=GPIO_BSRR_BS13;
 					TIM1->CNT=0;
+					TIM1->CR1|=TIM_CR1_CEN;
 					pulseState=1;
 				}
 				break;	
 		}
-		TIM1->CNT=0;
 		TIM1->SR &=~ TIM_SR_UIF;
-		/*sensFlag[0]=0;
-		sensFlag[1]=0;
-		sensFlag[2]=0;
-		sensFlag[3]=0;
-		if (echo_count==2){
-			echo_mes[pack+0]=med_filt(0);
-			echo_mes[pack+3]=med_filt(3);
-			echo_mes[pack+6]=med_filt(6);
-			echo_mes[pack+9]=med_filt(9);
-			echo_count=0;
-			switch (pack){
-				case 0:		
-					TIM1->CCR1=0;
-					TIM1->CCR2=10;
-					TIM1->CCR3=0;
-					pack=1;
-				break;
-				case 1:		
-					TIM1->CCR1=0;
-					TIM1->CCR2=0;
-					TIM1->CCR3=10;
-					pack=2;
-				break;
-				case 2:		
-					TIM1->CCR1=10;
-					TIM1->CCR2=0;
-					TIM1->CCR3=0;
-					pack=0;
-				break;
-			}
-		}
-		else echo_count++;
-		
-		TIM1->SR &=~ TIM_SR_CC1IF;
-		TIM1->SR &=~ TIM_SR_CC2IF;
-		TIM1->SR &=~ TIM_SR_CC3IF;
-		TIM1->SR &=~ TIM_SR_UIF; 
-		TIM5->CR1|=TIM_CR1_CEN;*/
 	}
 	if((TIM10->SR &TIM_SR_UIF)!=0)
 	{
@@ -413,50 +386,7 @@ void TIM1_UP_TIM10_IRQHandler(void)
 		TIM10->DIER &= ~(TIM_DIER_UIE); //запрещаем прерывание таймера
 		idleFlag=0;
 	}
-}
-
-/*void TIM1_CC_IRQHandler(void){
-	if ((TIM1->SR & TIM_SR_UIF)){
-		sensFlag[0]=0;
-		sensFlag[1]=0;
-		sensFlag[2]=0;
-		sensFlag[3]=0;
-		if (echo_count==2){
-			echo_mes[pack+0]=med_filt(0);
-			echo_mes[pack+3]=med_filt(3);
-			echo_mes[pack+6]=med_filt(6);
-			echo_mes[pack+9]=med_filt(9);
-			echo_count=0;
-			switch (pack){
-				case 0:		
-					TIM1->CCR1=0;
-					TIM1->CCR2=30;
-					TIM1->CCR3=0;
-					pack=1;
-				break;
-				case 1:		
-					TIM1->CCR1=0;
-					TIM1->CCR2=0;
-					TIM1->CCR3=30;
-					pack=2;
-				break;
-				case 2:		
-					TIM1->CCR1=30;
-					TIM1->CCR2=0;
-					TIM1->CCR3=0;
-					pack=0;
-				break;
-			}
-		}
-		else echo_count++;
-		
-		TIM1->SR &=~ TIM_SR_CC1IF;
-		TIM1->SR &=~ TIM_SR_CC2IF;
-		TIM1->SR &=~ TIM_SR_CC3IF;
-		TIM1->SR &=~ TIM_SR_UIF;
-		TIM5->CR1|=TIM_CR1_CEN;
-	}
-}    */
+}   
 
 void TIM6_DAC_IRQHandler(void){
 	if (TIM6->SR & TIM_SR_UIF){

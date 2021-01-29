@@ -5,7 +5,7 @@ uint16_t blinkTimer1=0;
 uint16_t updateTimer = 0;
 int war=0;
 extern uint8_t mode;
-extern double echo_mes[12];
+extern uint32_t echo_mes[12];
 void TIM8_TRG_COM_TIM14_IRQHandler(void)
 {
 	if((TIM14->SR &TIM_SR_UIF)!=0)

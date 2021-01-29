@@ -3,9 +3,9 @@
 <title>Static Call Graph - [.\Objects\MotorControl.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\MotorControl.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Wed Jan 27 20:01:15 2021
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Thu Jan 28 20:25:40 2021
 <BR><P>
-<H3>Maximum Stack Usage =        164 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
+<H3>Maximum Stack Usage =        156 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
 __rt_entry_main &rArr; main &rArr; animationLoop &rArr; rangeIndication &rArr; ledSetBlockHSV &rArr; ledSetHSV &rArr; ledSetRGB
 <P>
@@ -242,7 +242,7 @@ Global Symbols
 <P><STRONG><a name="[d0]"></a>__rt_entry_postsh_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$00000009))
 
 <P><STRONG><a name="[6c]"></a>__rt_entry_main</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$0000000D))
-<BR><BR>[Stack]<UL><LI>Max Depth = 164 + Unknown Stack Size
+<BR><BR>[Stack]<UL><LI>Max Depth = 156 + Unknown Stack Size
 <LI>Call Chain = __rt_entry_main &rArr; main &rArr; animationLoop &rArr; rangeIndication &rArr; ledSetBlockHSV &rArr; ledSetHSV &rArr; ledSetRGB
 </UL>
 <BR>[Calls]<UL><LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
@@ -587,7 +587,7 @@ Global Symbols
 <P><STRONG><a name="[1b]"></a>DMA1_Stream4_IRQHandler</STRONG> (Thumb, 66 bytes, Stack size 0 bytes, ledcontrol.o(i.DMA1_Stream4_IRQHandler))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f407xx.o(RESET)
 </UL>
-<P><STRONG><a name="[88]"></a>RccClockInit</STRONG> (Thumb, 292 bytes, Stack size 0 bytes, rcc.o(i.RccClockInit))
+<P><STRONG><a name="[89]"></a>RccClockInit</STRONG> (Thumb, 292 bytes, Stack size 0 bytes, rcc.o(i.RccClockInit))
 <BR><BR>[Called By]<UL><LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
@@ -601,19 +601,21 @@ Global Symbols
 <P><STRONG><a name="[5d]"></a>SystemInit</STRONG> (Thumb, 82 bytes, Stack size 0 bytes, system_stm32f4xx.o(i.SystemInit))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f407xx.o(.text)
 </UL>
-<P><STRONG><a name="[25]"></a>TIM1_UP_TIM10_IRQHandler</STRONG> (Thumb, 370 bytes, Stack size 8 bytes, pdu.o(i.TIM1_UP_TIM10_IRQHandler))
+<P><STRONG><a name="[25]"></a>TIM1_UP_TIM10_IRQHandler</STRONG> (Thumb, 376 bytes, Stack size 8 bytes, pdu.o(i.TIM1_UP_TIM10_IRQHandler))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = TIM1_UP_TIM10_IRQHandler
 </UL>
 <BR>[Calls]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__NVIC_DisableIRQ
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f407xx.o(RESET)
 </UL>
-<P><STRONG><a name="[3e]"></a>TIM5_IRQHandler</STRONG> (Thumb, 910 bytes, Stack size 24 bytes, pdu.o(i.TIM5_IRQHandler))
-<BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = TIM5_IRQHandler &rArr; __aeabi_ddiv
+<P><STRONG><a name="[3e]"></a>TIM5_IRQHandler</STRONG> (Thumb, 1052 bytes, Stack size 32 bytes, pdu.o(i.TIM5_IRQHandler))
+<BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = TIM5_IRQHandler &rArr; __aeabi_d2uiz
 </UL>
-<BR>[Calls]<UL><LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ddiv
-<LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dsub
-<LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__NVIC_EnableIRQ
+<BR>[Calls]<UL><LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2uiz
+<LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ddiv
+<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;med_filt
+<LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__NVIC_EnableIRQ
+<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
 <LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ui2d
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f407xx.o(RESET)
@@ -642,170 +644,177 @@ Global Symbols
 <P><STRONG><a name="[53]"></a>USART6_IRQHandler</STRONG> (Thumb, 36 bytes, Stack size 0 bytes, bsp.o(i.USART6_IRQHandler))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f407xx.o(RESET)
 </UL>
-<P><STRONG><a name="[97]"></a>__hardfp_fabs</STRONG> (Thumb, 20 bytes, Stack size 8 bytes, fabs.o(i.__hardfp_fabs))
+<P><STRONG><a name="[98]"></a>__hardfp_fabs</STRONG> (Thumb, 20 bytes, Stack size 8 bytes, fabs.o(i.__hardfp_fabs))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = __hardfp_fabs
 </UL>
 <BR>[Called By]<UL><LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[8f]"></a>animationInit</STRONG> (Thumb, 90 bytes, Stack size 0 bytes, animation.o(i.animationInit))
+<P><STRONG><a name="[90]"></a>animationInit</STRONG> (Thumb, 90 bytes, Stack size 0 bytes, animation.o(i.animationInit))
 <BR><BR>[Called By]<UL><LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[7b]"></a>animationLoop</STRONG> (Thumb, 852 bytes, Stack size 16 bytes, animation.o(i.animationLoop))
-<BR><BR>[Stack]<UL><LI>Max Depth = 132<LI>Call Chain = animationLoop &rArr; rangeIndication &rArr; ledSetBlockHSV &rArr; ledSetHSV &rArr; ledSetRGB
+<P><STRONG><a name="[7d]"></a>animationLoop</STRONG> (Thumb, 612 bytes, Stack size 8 bytes, animation.o(i.animationLoop))
+<BR><BR>[Stack]<UL><LI>Max Depth = 124<LI>Call Chain = animationLoop &rArr; rangeIndication &rArr; ledSetBlockHSV &rArr; ledSetHSV &rArr; ledSetRGB
 </UL>
-<BR>[Calls]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2uiz
-<LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ledUpdate
-<LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ledSetBlockRGB
-<LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ledSetBlockHSV
-<LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rangeIndication
+<BR>[Calls]<UL><LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ledUpdate
+<LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ledSetBlockRGB
+<LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ledSetBlockHSV
+<LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rangeIndication
 </UL>
 <BR>[Called By]<UL><LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[85]"></a>buffClear</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, ledcontrol.o(i.buffClear))
-<BR><BR>[Called By]<UL><LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ledInit
+<P><STRONG><a name="[86]"></a>buffClear</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, ledcontrol.o(i.buffClear))
+<BR><BR>[Called By]<UL><LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ledInit
 </UL>
 
-<P><STRONG><a name="[82]"></a>constr</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, pdu.o(i.constr))
-<BR><BR>[Called By]<UL><LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;deg_to_pwm
+<P><STRONG><a name="[83]"></a>constr</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, pdu.o(i.constr))
+<BR><BR>[Called By]<UL><LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;deg_to_pwm
 </UL>
 
-<P><STRONG><a name="[81]"></a>deg_to_pwm</STRONG> (Thumb, 24 bytes, Stack size 4 bytes, pdu.o(i.deg_to_pwm))
+<P><STRONG><a name="[82]"></a>deg_to_pwm</STRONG> (Thumb, 24 bytes, Stack size 4 bytes, pdu.o(i.deg_to_pwm))
 <BR><BR>[Stack]<UL><LI>Max Depth = 4<LI>Call Chain = deg_to_pwm
 </UL>
-<BR>[Calls]<UL><LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;constr
+<BR>[Calls]<UL><LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;constr
 </UL>
 <BR>[Called By]<UL><LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[83]"></a>ledInit</STRONG> (Thumb, 286 bytes, Stack size 8 bytes, ledcontrol.o(i.ledInit))
+<P><STRONG><a name="[84]"></a>ledInit</STRONG> (Thumb, 286 bytes, Stack size 8 bytes, ledcontrol.o(i.ledInit))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = ledInit
 </UL>
-<BR>[Calls]<UL><LI><a href="#[85]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buffClear
-<LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__NVIC_EnableIRQ
+<BR>[Calls]<UL><LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buffClear
+<LI><a href="#[85]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__NVIC_EnableIRQ
 </UL>
 <BR>[Called By]<UL><LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[80]"></a>ledSetBlockHSV</STRONG> (Thumb, 72 bytes, Stack size 28 bytes, ledcontrol.o(i.ledSetBlockHSV))
+<P><STRONG><a name="[81]"></a>ledSetBlockHSV</STRONG> (Thumb, 72 bytes, Stack size 28 bytes, ledcontrol.o(i.ledSetBlockHSV))
 <BR><BR>[Stack]<UL><LI>Max Depth = 84<LI>Call Chain = ledSetBlockHSV &rArr; ledSetHSV &rArr; ledSetRGB
 </UL>
-<BR>[Calls]<UL><LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ledSetHSV
+<BR>[Calls]<UL><LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ledSetHSV
 </UL>
-<BR>[Called By]<UL><LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rangeIndication
-<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;animationLoop
+<BR>[Called By]<UL><LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;rangeIndication
+<LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;animationLoop
 </UL>
 
-<P><STRONG><a name="[7c]"></a>ledSetBlockRGB</STRONG> (Thumb, 72 bytes, Stack size 28 bytes, ledcontrol.o(i.ledSetBlockRGB))
+<P><STRONG><a name="[7e]"></a>ledSetBlockRGB</STRONG> (Thumb, 72 bytes, Stack size 28 bytes, ledcontrol.o(i.ledSetBlockRGB))
 <BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = ledSetBlockRGB &rArr; ledSetRGB
 </UL>
-<BR>[Calls]<UL><LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ledSetRGB
+<BR>[Calls]<UL><LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ledSetRGB
 </UL>
-<BR>[Called By]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;animationLoop
+<BR>[Called By]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;animationLoop
 </UL>
 
-<P><STRONG><a name="[86]"></a>ledSetHSV</STRONG> (Thumb, 302 bytes, Stack size 36 bytes, ledcontrol.o(i.ledSetHSV))
+<P><STRONG><a name="[87]"></a>ledSetHSV</STRONG> (Thumb, 302 bytes, Stack size 36 bytes, ledcontrol.o(i.ledSetHSV))
 <BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = ledSetHSV &rArr; ledSetRGB
 </UL>
-<BR>[Calls]<UL><LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ledSetRGB
+<BR>[Calls]<UL><LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ledSetRGB
 </UL>
-<BR>[Called By]<UL><LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ledSetBlockHSV
+<BR>[Called By]<UL><LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ledSetBlockHSV
 </UL>
 
-<P><STRONG><a name="[87]"></a>ledSetRGB</STRONG> (Thumb, 220 bytes, Stack size 20 bytes, ledcontrol.o(i.ledSetRGB))
+<P><STRONG><a name="[88]"></a>ledSetRGB</STRONG> (Thumb, 220 bytes, Stack size 20 bytes, ledcontrol.o(i.ledSetRGB))
 <BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = ledSetRGB
 </UL>
-<BR>[Called By]<UL><LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ledSetHSV
-<LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ledSetBlockRGB
+<BR>[Called By]<UL><LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ledSetHSV
+<LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ledSetBlockRGB
 </UL>
 
-<P><STRONG><a name="[7d]"></a>ledUpdate</STRONG> (Thumb, 58 bytes, Stack size 0 bytes, ledcontrol.o(i.ledUpdate))
-<BR><BR>[Called By]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;animationLoop
+<P><STRONG><a name="[7f]"></a>ledUpdate</STRONG> (Thumb, 58 bytes, Stack size 0 bytes, ledcontrol.o(i.ledUpdate))
+<BR><BR>[Called By]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;animationLoop
 </UL>
 
-<P><STRONG><a name="[6d]"></a>main</STRONG> (Thumb, 2512 bytes, Stack size 32 bytes, main.o(i.main))
-<BR><BR>[Stack]<UL><LI>Max Depth = 164<LI>Call Chain = main &rArr; animationLoop &rArr; rangeIndication &rArr; ledSetBlockHSV &rArr; ledSetHSV &rArr; ledSetRGB
+<P><STRONG><a name="[6d]"></a>main</STRONG> (Thumb, 2090 bytes, Stack size 32 bytes, main.o(i.main))
+<BR><BR>[Stack]<UL><LI>Max Depth = 156<LI>Call Chain = main &rArr; animationLoop &rArr; rangeIndication &rArr; ledSetBlockHSV &rArr; ledSetHSV &rArr; ledSetRGB
 </UL>
-<BR>[Calls]<UL><LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2iz
-<LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_cdcmpeq
-<LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_drsub
+<BR>[Calls]<UL><LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_d2iz
+<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_cdcmpeq
+<LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_drsub
 <LI><a href="#[9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uartTransmittBuff
 <LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uartTransmitt
-<LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uart2Init
-<LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tim8Init
-<LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tim6Init
-<LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tim5Init
-<LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tim4Init
-<LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tim2Init
-<LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tim1Init
-<LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sign
-<LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;map
-<LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ledInit
-<LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;deg_to_pwm
-<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;animationLoop
-<LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;animationInit
-<LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RccClockInit
-<LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__NVIC_EnableIRQ
-<LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__NVIC_DisableIRQ
-<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_fabs
-<LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_cdrcmple
-<LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
-<LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_cdcmple
-<LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_i2d
+<LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uart2Init
+<LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tim8Init
+<LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tim6Init
+<LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tim5Init
+<LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tim4Init
+<LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tim2Init
+<LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tim1Init
+<LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sign
+<LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;map
+<LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ledInit
+<LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;deg_to_pwm
+<LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;animationLoop
+<LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;animationInit
+<LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RccClockInit
+<LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__NVIC_EnableIRQ
+<LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__NVIC_DisableIRQ
+<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_fabs
+<LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_cdrcmple
+<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_dmul
+<LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_cdcmple
+<LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_i2d
 </UL>
 <BR>[Called By]<UL><LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_entry_main
 </UL>
 
-<P><STRONG><a name="[99]"></a>map</STRONG> (Thumb, 22 bytes, Stack size 16 bytes, pdu.o(i.map))
+<P><STRONG><a name="[9a]"></a>map</STRONG> (Thumb, 22 bytes, Stack size 16 bytes, pdu.o(i.map))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = map
 </UL>
 <BR>[Called By]<UL><LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[9b]"></a>sign</STRONG> (Thumb, 72 bytes, Stack size 16 bytes, pdu.o(i.sign))
+<P><STRONG><a name="[7b]"></a>med_filt</STRONG> (Thumb, 100 bytes, Stack size 24 bytes, pdu.o(i.med_filt))
+<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = med_filt
+</UL>
+<BR>[Calls]<UL><LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_ui2d
+</UL>
+<BR>[Called By]<UL><LI><a href="#[3e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM5_IRQHandler
+</UL>
+
+<P><STRONG><a name="[9c]"></a>sign</STRONG> (Thumb, 72 bytes, Stack size 16 bytes, pdu.o(i.sign))
 <BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = sign &rArr; __aeabi_cdcmple
 </UL>
-<BR>[Calls]<UL><LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_cdrcmple
-<LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_cdcmple
+<BR>[Calls]<UL><LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_cdrcmple
+<LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_cdcmple
 </UL>
 <BR>[Called By]<UL><LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[8d]"></a>tim1Init</STRONG> (Thumb, 120 bytes, Stack size 8 bytes, pdu.o(i.tim1Init))
+<P><STRONG><a name="[8e]"></a>tim1Init</STRONG> (Thumb, 120 bytes, Stack size 8 bytes, pdu.o(i.tim1Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = tim1Init
 </UL>
-<BR>[Calls]<UL><LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__NVIC_EnableIRQ
+<BR>[Calls]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__NVIC_EnableIRQ
 </UL>
 <BR>[Called By]<UL><LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[8a]"></a>tim2Init</STRONG> (Thumb, 242 bytes, Stack size 0 bytes, pdu.o(i.tim2Init))
+<P><STRONG><a name="[8b]"></a>tim2Init</STRONG> (Thumb, 242 bytes, Stack size 0 bytes, pdu.o(i.tim2Init))
 <BR><BR>[Called By]<UL><LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[89]"></a>tim4Init</STRONG> (Thumb, 234 bytes, Stack size 0 bytes, pdu.o(i.tim4Init))
+<P><STRONG><a name="[8a]"></a>tim4Init</STRONG> (Thumb, 234 bytes, Stack size 0 bytes, pdu.o(i.tim4Init))
 <BR><BR>[Called By]<UL><LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[8b]"></a>tim5Init</STRONG> (Thumb, 250 bytes, Stack size 8 bytes, pdu.o(i.tim5Init))
+<P><STRONG><a name="[8c]"></a>tim5Init</STRONG> (Thumb, 252 bytes, Stack size 8 bytes, pdu.o(i.tim5Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = tim5Init
 </UL>
-<BR>[Calls]<UL><LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__NVIC_EnableIRQ
+<BR>[Calls]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__NVIC_EnableIRQ
 </UL>
 <BR>[Called By]<UL><LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[8e]"></a>tim6Init</STRONG> (Thumb, 56 bytes, Stack size 8 bytes, pdu.o(i.tim6Init))
+<P><STRONG><a name="[8f]"></a>tim6Init</STRONG> (Thumb, 56 bytes, Stack size 8 bytes, pdu.o(i.tim6Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = tim6Init
 </UL>
-<BR>[Calls]<UL><LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__NVIC_EnableIRQ
+<BR>[Calls]<UL><LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__NVIC_EnableIRQ
 </UL>
 <BR>[Called By]<UL><LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[8c]"></a>tim8Init</STRONG> (Thumb, 230 bytes, Stack size 0 bytes, pdu.o(i.tim8Init))
+<P><STRONG><a name="[8d]"></a>tim8Init</STRONG> (Thumb, 230 bytes, Stack size 0 bytes, pdu.o(i.tim8Init))
 <BR><BR>[Called By]<UL><LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
@@ -813,7 +822,7 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_Handler
 </UL>
 
-<P><STRONG><a name="[90]"></a>uart2Init</STRONG> (Thumb, 146 bytes, Stack size 16 bytes, bsp.o(i.uart2Init))
+<P><STRONG><a name="[91]"></a>uart2Init</STRONG> (Thumb, 146 bytes, Stack size 16 bytes, bsp.o(i.uart2Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = uart2Init
 </UL>
 <BR>[Calls]<UL><LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__NVIC_EnableIRQ
@@ -848,7 +857,7 @@ Global Symbols
 <LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dcmple
 </UL>
 
-<P><STRONG><a name="[79]"></a>__aeabi_ddiv</STRONG> (Thumb, 0 bytes, Stack size 32 bytes, ddiv.o(x$fpl$ddiv))
+<P><STRONG><a name="[78]"></a>__aeabi_ddiv</STRONG> (Thumb, 0 bytes, Stack size 32 bytes, ddiv.o(x$fpl$ddiv))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = __aeabi_ddiv
 </UL>
 <BR>[Called By]<UL><LI><a href="#[3e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM5_IRQHandler
@@ -859,7 +868,7 @@ Global Symbols
 <LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_dnaninf
 </UL>
 
-<P><STRONG><a name="[96]"></a>__aeabi_cdcmpeq</STRONG> (Thumb, 0 bytes, Stack size 32 bytes, deqf.o(x$fpl$deqf))
+<P><STRONG><a name="[97]"></a>__aeabi_cdcmpeq</STRONG> (Thumb, 0 bytes, Stack size 32 bytes, deqf.o(x$fpl$deqf))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = __aeabi_cdcmpeq
 </UL>
 <BR>[Called By]<UL><LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
@@ -870,7 +879,7 @@ Global Symbols
 <LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_dcmp_Inf
 </UL>
 
-<P><STRONG><a name="[98]"></a>__aeabi_d2iz</STRONG> (Thumb, 0 bytes, Stack size 32 bytes, dfix.o(x$fpl$dfix))
+<P><STRONG><a name="[99]"></a>__aeabi_d2iz</STRONG> (Thumb, 0 bytes, Stack size 32 bytes, dfix.o(x$fpl$dfix))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = __aeabi_d2iz
 </UL>
 <BR>[Called By]<UL><LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
@@ -880,32 +889,33 @@ Global Symbols
 <BR><BR>[Calls]<UL><LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_dnaninf
 </UL>
 
-<P><STRONG><a name="[7e]"></a>__aeabi_d2uiz</STRONG> (Thumb, 0 bytes, Stack size 32 bytes, dfixu.o(x$fpl$dfixu))
+<P><STRONG><a name="[7a]"></a>__aeabi_d2uiz</STRONG> (Thumb, 0 bytes, Stack size 32 bytes, dfixu.o(x$fpl$dfixu))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = __aeabi_d2uiz
 </UL>
-<BR>[Called By]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;animationLoop
+<BR>[Called By]<UL><LI><a href="#[3e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM5_IRQHandler
 </UL>
 
 <P><STRONG><a name="[a9]"></a>_dfixu</STRONG> (Thumb, 90 bytes, Stack size 32 bytes, dfixu.o(x$fpl$dfixu), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_dnaninf
 </UL>
 
-<P><STRONG><a name="[93]"></a>__aeabi_i2d</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, dflt_clz.o(x$fpl$dflt))
+<P><STRONG><a name="[94]"></a>__aeabi_i2d</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, dflt_clz.o(x$fpl$dflt))
 <BR><BR>[Called By]<UL><LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
 <P><STRONG><a name="[dc]"></a>_dflt</STRONG> (Thumb, 46 bytes, Stack size 0 bytes, dflt_clz.o(x$fpl$dflt), UNUSED)
 
 <P><STRONG><a name="[77]"></a>__aeabi_ui2d</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, dflt_clz.o(x$fpl$dfltu))
-<BR><BR>[Called By]<UL><LI><a href="#[3e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM5_IRQHandler
+<BR><BR>[Called By]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;med_filt
+<LI><a href="#[3e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM5_IRQHandler
 </UL>
 
 <P><STRONG><a name="[dd]"></a>_dfltu</STRONG> (Thumb, 38 bytes, Stack size 0 bytes, dflt_clz.o(x$fpl$dfltu), UNUSED)
 
-<P><STRONG><a name="[94]"></a>__aeabi_cdcmple</STRONG> (Thumb, 0 bytes, Stack size 32 bytes, dleqf.o(x$fpl$dleqf))
+<P><STRONG><a name="[95]"></a>__aeabi_cdcmple</STRONG> (Thumb, 0 bytes, Stack size 32 bytes, dleqf.o(x$fpl$dleqf))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = __aeabi_cdcmple
 </UL>
-<BR>[Called By]<UL><LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sign
+<BR>[Called By]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sign
 <LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
@@ -918,10 +928,11 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_drcmple
 </UL>
 
-<P><STRONG><a name="[9c]"></a>__aeabi_dmul</STRONG> (Thumb, 0 bytes, Stack size 32 bytes, dmul.o(x$fpl$dmul))
+<P><STRONG><a name="[79]"></a>__aeabi_dmul</STRONG> (Thumb, 0 bytes, Stack size 32 bytes, dmul.o(x$fpl$dmul))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = __aeabi_dmul
 </UL>
-<BR>[Called By]<UL><LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<BR>[Called By]<UL><LI><a href="#[3e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM5_IRQHandler
+<LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
 <P><STRONG><a name="[ab]"></a>_dmul</STRONG> (Thumb, 332 bytes, Stack size 32 bytes, dmul.o(x$fpl$dmul), UNUSED)
@@ -946,10 +957,10 @@ Global Symbols
 <LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dmul
 </UL>
 
-<P><STRONG><a name="[95]"></a>__aeabi_cdrcmple</STRONG> (Thumb, 0 bytes, Stack size 16 bytes, drleqf.o(x$fpl$drleqf))
+<P><STRONG><a name="[96]"></a>__aeabi_cdrcmple</STRONG> (Thumb, 0 bytes, Stack size 16 bytes, drleqf.o(x$fpl$drleqf))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = __aeabi_cdrcmple
 </UL>
-<BR>[Called By]<UL><LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sign
+<BR>[Called By]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;sign
 <LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
@@ -957,7 +968,7 @@ Global Symbols
 <BR><BR>[Calls]<UL><LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__fpl_dcmple_InfNaN
 </UL>
 
-<P><STRONG><a name="[9a]"></a>__aeabi_drsub</STRONG> (Thumb, 0 bytes, Stack size 8 bytes, daddsub_clz.o(x$fpl$drsb))
+<P><STRONG><a name="[9b]"></a>__aeabi_drsub</STRONG> (Thumb, 0 bytes, Stack size 8 bytes, daddsub_clz.o(x$fpl$drsb))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = __aeabi_drsub
 </UL>
 <BR>[Called By]<UL><LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
@@ -968,11 +979,7 @@ Global Symbols
 <LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dadd1
 </UL>
 
-<P><STRONG><a name="[78]"></a>__aeabi_dsub</STRONG> (Thumb, 0 bytes, Stack size 32 bytes, daddsub_clz.o(x$fpl$dsub))
-<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = __aeabi_dsub
-</UL>
-<BR>[Called By]<UL><LI><a href="#[3e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM5_IRQHandler
-</UL>
+<P><STRONG><a name="[de]"></a>__aeabi_dsub</STRONG> (Thumb, 0 bytes, Stack size 32 bytes, daddsub_clz.o(x$fpl$dsub), UNUSED)
 
 <P><STRONG><a name="[b0]"></a>_dsub</STRONG> (Thumb, 464 bytes, Stack size 32 bytes, daddsub_clz.o(x$fpl$dsub), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_dadd1
@@ -983,18 +990,18 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[66]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__rt_lib_init_fp_1
 </UL>
 
-<P><STRONG><a name="[de]"></a>__fplib_config_fpu_vfp</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, fpinit.o(x$fpl$fpinit), UNUSED)
+<P><STRONG><a name="[df]"></a>__fplib_config_fpu_vfp</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, fpinit.o(x$fpl$fpinit), UNUSED)
 
-<P><STRONG><a name="[df]"></a>__fplib_config_pureend_doubles</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, fpinit.o(x$fpl$fpinit), UNUSED)
+<P><STRONG><a name="[e0]"></a>__fplib_config_pureend_doubles</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, fpinit.o(x$fpl$fpinit), UNUSED)
 <P>
 <H3>
 Local Symbols
 </H3>
-<P><STRONG><a name="[91]"></a>__NVIC_DisableIRQ</STRONG> (Thumb, 30 bytes, Stack size 0 bytes, main.o(i.__NVIC_DisableIRQ))
+<P><STRONG><a name="[92]"></a>__NVIC_DisableIRQ</STRONG> (Thumb, 30 bytes, Stack size 0 bytes, main.o(i.__NVIC_DisableIRQ))
 <BR><BR>[Called By]<UL><LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[92]"></a>__NVIC_EnableIRQ</STRONG> (Thumb, 34 bytes, Stack size 0 bytes, main.o(i.__NVIC_EnableIRQ))
+<P><STRONG><a name="[93]"></a>__NVIC_EnableIRQ</STRONG> (Thumb, 34 bytes, Stack size 0 bytes, main.o(i.__NVIC_EnableIRQ))
 <BR><BR>[Called By]<UL><LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
@@ -1002,31 +1009,31 @@ Local Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[25]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM1_UP_TIM10_IRQHandler
 </UL>
 
-<P><STRONG><a name="[7a]"></a>__NVIC_EnableIRQ</STRONG> (Thumb, 34 bytes, Stack size 0 bytes, pdu.o(i.__NVIC_EnableIRQ))
+<P><STRONG><a name="[7c]"></a>__NVIC_EnableIRQ</STRONG> (Thumb, 34 bytes, Stack size 0 bytes, pdu.o(i.__NVIC_EnableIRQ))
 <BR><BR>[Called By]<UL><LI><a href="#[3e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM5_IRQHandler
-<LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tim6Init
-<LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tim5Init
-<LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tim1Init
+<LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tim6Init
+<LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tim5Init
+<LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tim1Init
 </UL>
 
-<P><STRONG><a name="[7f]"></a>rangeIndication</STRONG> (Thumb, 68 bytes, Stack size 32 bytes, animation.o(i.rangeIndication))
+<P><STRONG><a name="[80]"></a>rangeIndication</STRONG> (Thumb, 68 bytes, Stack size 32 bytes, animation.o(i.rangeIndication))
 <BR><BR>[Stack]<UL><LI>Max Depth = 116<LI>Call Chain = rangeIndication &rArr; ledSetBlockHSV &rArr; ledSetHSV &rArr; ledSetRGB
 </UL>
-<BR>[Calls]<UL><LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ledSetBlockHSV
+<BR>[Calls]<UL><LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ledSetBlockHSV
 </UL>
-<BR>[Called By]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;animationLoop
+<BR>[Called By]<UL><LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;animationLoop
 </UL>
 
-<P><STRONG><a name="[84]"></a>__NVIC_EnableIRQ</STRONG> (Thumb, 34 bytes, Stack size 0 bytes, ledcontrol.o(i.__NVIC_EnableIRQ))
-<BR><BR>[Called By]<UL><LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ledInit
+<P><STRONG><a name="[85]"></a>__NVIC_EnableIRQ</STRONG> (Thumb, 34 bytes, Stack size 0 bytes, ledcontrol.o(i.__NVIC_EnableIRQ))
+<BR><BR>[Called By]<UL><LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ledInit
 </UL>
 
 <P><STRONG><a name="[9f]"></a>Tim9Init</STRONG> (Thumb, 44 bytes, Stack size 0 bytes, bsp.o(i.Tim9Init))
-<BR><BR>[Called By]<UL><LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uart2Init
+<BR><BR>[Called By]<UL><LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uart2Init
 </UL>
 
 <P><STRONG><a name="[a0]"></a>__NVIC_EnableIRQ</STRONG> (Thumb, 34 bytes, Stack size 0 bytes, bsp.o(i.__NVIC_EnableIRQ))
-<BR><BR>[Called By]<UL><LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uart2Init
+<BR><BR>[Called By]<UL><LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;uart2Init
 </UL>
 
 <P><STRONG><a name="[af]"></a>_dadd1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, daddsub_clz.o(x$fpl$dadd), UNUSED)

@@ -7,7 +7,7 @@
 
 extern int pduTimer;
 extern char pack;
-extern double echo_mes[12];
+extern uint32_t echo_mes[12];
 extern double gam;
 extern uint8_t frameBuff[3];
 extern uint8_t reciveStatus;
