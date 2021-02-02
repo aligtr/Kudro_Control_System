@@ -159,8 +159,8 @@ int main(void)
 				for(war=0;war<450;war+=20){
 					if (echo_mes[0]<war||echo_mes[1]<war||echo_mes[2]<war||echo_mes[3]<war||echo_mes[4]<war||echo_mes[5]<war||
 							echo_mes[6]<war||echo_mes[7]<war||echo_mes[8]<war||echo_mes[9]<war||echo_mes[10]<war||echo_mes[11]<war){
-								if(war>40)
-									temp=(war<400) ? (uint16_t)(war/80) : (uint16_t)5;
+								if(war>120)
+									temp=(war<300) ? (uint16_t)(war/100) : (uint16_t)3 ;
 								else 
 									temp=0;
 								uartTransmitt(0x0B,USART2);

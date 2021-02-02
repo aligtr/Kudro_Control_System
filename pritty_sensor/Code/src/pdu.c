@@ -191,22 +191,22 @@ void TIM5_IRQHandler(void){
 		TIM5->SR &=~ TIM_SR_UIF;
 		if(sensFlag[0]!=1)
 		{
-			echo_filter[echoState+0][senseCount]=700;
+			echo_filter[echoState+0][senseCount]=500;
 			sensFlag[0]=1;
 		}
 		if(sensFlag[1]!=1)
 		{
-			echo_filter[echoState+3][senseCount]=700;
+			echo_filter[echoState+3][senseCount]=500;
 			sensFlag[1]=1;
 		}
 		if(sensFlag[2]!=1)
 		{
-			echo_filter[echoState+6][senseCount]=700;
+			echo_filter[echoState+6][senseCount]=500;
 			sensFlag[2]=1;
 		}
 		if(sensFlag[3]!=1)
 		{
-			echo_filter[echoState+9][senseCount]=700;
+			echo_filter[echoState+9][senseCount]=500;
 			sensFlag[3]=1;
 		}	
 	}
@@ -280,6 +280,7 @@ void TIM5_IRQHandler(void){
 				for(i=0;i<12;i++)
 				{
 					echo_mes[i]=med_filt(i);
+					if (echo_mes[i]<20) echo_mes[i]=500;
 				}
 			}
 			else

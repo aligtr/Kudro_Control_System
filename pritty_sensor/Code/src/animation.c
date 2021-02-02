@@ -1,5 +1,7 @@
 #include "animation.h"
 
+#define UZ_MIN_LENGTH 120
+
 uint16_t blinkTimer=0;
 uint16_t blinkTimer1=0;
 uint16_t updateTimer = 0;
@@ -71,22 +73,22 @@ void animationLoop(void)
 	{
 		if(mode==1)
 		{
-			if(war>40)
+			if(war>50)
 			{
 				redBlink=0;
 				//rangeIndication(0,88,war,400,40);
-				rangeIndication(0,5,(uint16_t)echo_mes[10],450,50);//10
-				rangeIndication(5,7,(uint16_t)echo_mes[11],450,50);//11
-				rangeIndication(12,6,(uint16_t)echo_mes[0],450,50);//0
-				rangeIndication(18,6,(uint16_t)echo_mes[1],450,50);//1
-				rangeIndication(24,6,(uint16_t)echo_mes[2],450,50);//2
-				rangeIndication(30,7,(uint16_t)echo_mes[3],450,50);//3
-				rangeIndication(37,7,(uint16_t)echo_mes[4],450,50);//5
-				rangeIndication(44,7,(uint16_t)echo_mes[5],450,50);//6
-				rangeIndication(51,7,(uint16_t)echo_mes[6],450,50);//6
-				rangeIndication(58,6,(uint16_t)echo_mes[7],450,50);//7
-				rangeIndication(64,7,(uint16_t)echo_mes[8],450,50);//8
-				rangeIndication(71,8,(uint16_t)echo_mes[9],450,50);//9
+				rangeIndication(0,5,(uint16_t)echo_mes[10],500,UZ_MIN_LENGTH);//10
+				rangeIndication(5,7,(uint16_t)echo_mes[11],500,UZ_MIN_LENGTH);//11
+				rangeIndication(12,6,(uint16_t)echo_mes[0],500,UZ_MIN_LENGTH);//0
+				rangeIndication(18,6,(uint16_t)echo_mes[1],500,UZ_MIN_LENGTH);//1
+				rangeIndication(24,6,(uint16_t)echo_mes[2],500,UZ_MIN_LENGTH);//2
+				rangeIndication(30,7,(uint16_t)echo_mes[3],500,UZ_MIN_LENGTH);//3
+				rangeIndication(37,7,(uint16_t)echo_mes[4],500,UZ_MIN_LENGTH);//5
+				rangeIndication(44,7,(uint16_t)echo_mes[5],500,UZ_MIN_LENGTH);//6
+				rangeIndication(51,7,(uint16_t)echo_mes[6],500,UZ_MIN_LENGTH);//6
+				rangeIndication(58,6,(uint16_t)echo_mes[7],500,UZ_MIN_LENGTH);//7
+				rangeIndication(64,7,(uint16_t)echo_mes[8],500,UZ_MIN_LENGTH);//8
+				rangeIndication(71,8,(uint16_t)echo_mes[9],500,UZ_MIN_LENGTH);//9
 			}
 			else
 			{
