@@ -8,6 +8,7 @@ uint16_t updateTimer = 0;
 int war=0;
 extern uint8_t mode;
 extern uint32_t echo_mes[12];
+extern uint32_t control_mes[12];
 void TIM8_TRG_COM_TIM14_IRQHandler(void)
 {
 	if((TIM14->SR &TIM_SR_UIF)!=0)
@@ -77,18 +78,18 @@ void animationLoop(void)
 			{
 				redBlink=0;
 				//rangeIndication(0,88,war,400,40);
-				rangeIndication(0,5,(uint16_t)echo_mes[10],500,UZ_MIN_LENGTH);//10
-				rangeIndication(5,7,(uint16_t)echo_mes[11],500,UZ_MIN_LENGTH);//11
-				rangeIndication(12,6,(uint16_t)echo_mes[0],500,UZ_MIN_LENGTH);//0
-				rangeIndication(18,6,(uint16_t)echo_mes[1],500,UZ_MIN_LENGTH);//1
-				rangeIndication(24,6,(uint16_t)echo_mes[2],500,UZ_MIN_LENGTH);//2
-				rangeIndication(30,7,(uint16_t)echo_mes[3],500,UZ_MIN_LENGTH);//3
-				rangeIndication(37,7,(uint16_t)echo_mes[4],500,UZ_MIN_LENGTH);//5
-				rangeIndication(44,7,(uint16_t)echo_mes[5],500,UZ_MIN_LENGTH);//6
-				rangeIndication(51,7,(uint16_t)echo_mes[6],500,UZ_MIN_LENGTH);//6
-				rangeIndication(58,6,(uint16_t)echo_mes[7],500,UZ_MIN_LENGTH);//7
-				rangeIndication(64,7,(uint16_t)echo_mes[8],500,UZ_MIN_LENGTH);//8
-				rangeIndication(71,8,(uint16_t)echo_mes[9],500,UZ_MIN_LENGTH);//9
+				rangeIndication(0,5,(uint16_t)control_mes[10],500,UZ_MIN_LENGTH);//10
+				rangeIndication(5,7,(uint16_t)control_mes[11],500,UZ_MIN_LENGTH);//11
+				rangeIndication(12,6,(uint16_t)control_mes[0],500,UZ_MIN_LENGTH);//0
+				rangeIndication(18,6,(uint16_t)control_mes[1],500,UZ_MIN_LENGTH);//1
+				rangeIndication(24,6,(uint16_t)control_mes[2],500,UZ_MIN_LENGTH);//2
+				rangeIndication(30,7,(uint16_t)control_mes[3],500,UZ_MIN_LENGTH);//3
+				rangeIndication(37,7,(uint16_t)control_mes[4],500,UZ_MIN_LENGTH);//5
+				rangeIndication(44,7,(uint16_t)control_mes[5],500,UZ_MIN_LENGTH);//6
+				rangeIndication(51,7,(uint16_t)control_mes[6],500,UZ_MIN_LENGTH);//6
+				rangeIndication(58,6,(uint16_t)control_mes[7],500,UZ_MIN_LENGTH);//7
+				rangeIndication(64,7,(uint16_t)control_mes[8],500,UZ_MIN_LENGTH);//8
+				rangeIndication(71,8,(uint16_t)control_mes[9],500,UZ_MIN_LENGTH);//9
 			}
 			else
 			{

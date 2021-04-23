@@ -8,6 +8,7 @@
 extern int pduTimer;
 extern char pack;
 extern uint32_t echo_mes[12];
+uint32_t control_mes[12];
 extern double gam;
 extern uint8_t frameBuff[3];
 extern uint8_t reciveStatus;
@@ -19,7 +20,9 @@ int main(void)
 {
 	uint16_t temp;
 	uint16_t gamTemp;
+	uint8_t i;
 	uint8_t timerEnableFlag=1;
+	uint8_t iter;
 	RccClockInit();
 	tim4Init();
 	tim2Init();
@@ -61,6 +64,7 @@ int main(void)
 				//9,10,11
 			//gam=sign(gam)*(180-fabs(gam));
 			//if (gam==0) gam=180;
+			for (iter=0;iter<12;iter++) control_mes[iter]=echo_mes[iter];
 				if((gam<=0 && gam>=-180) || gam==180)
 				{
 					echo_angle[9]=map(fabs(gam),0,180,30,90);
@@ -72,9 +76,9 @@ int main(void)
 					echo_angle[9]=60;
 					echo_angle[10]=60;
 					echo_angle[11]=60;
-					echo_mes[9]=1000;
-					echo_mes[10]=1000;
-					echo_mes[11]=1000;
+					control_mes[9]=1000;
+					control_mes[10]=1000;
+					control_mes[11]=1000;
 					
 				}
 				//3,4,5
@@ -89,9 +93,9 @@ int main(void)
 					echo_angle[3]=60;
 					echo_angle[4]=60;
 					echo_angle[5]=60;
-					echo_mes[3]=1000;
-					echo_mes[4]=1000;
-					echo_mes[5]=1000;
+					control_mes[3]=1000;
+					control_mes[4]=1000;
+					control_mes[5]=1000;
 				}
 				//1
 				if(gam>=-90 && gam<=90)
@@ -101,7 +105,7 @@ int main(void)
 				else
 				{
 					echo_angle[1]=75;
-					echo_mes[1]=1000;
+					control_mes[1]=1000;
 				}
 				//0
 				if(gam>=-180 && gam<=90)
@@ -111,7 +115,7 @@ int main(void)
 				else
 				{
 					echo_angle[0]=60+45;
-					echo_mes[0]=1000;
+					control_mes[0]=1000;
 				}
 				//2
 				if(gam>=-90 && gam<=180)
@@ -121,7 +125,7 @@ int main(void)
 				else
 				{
 					echo_angle[2]=30+45;
-					echo_mes[2]=1000;
+					control_mes[2]=1000;
 				}
 				
 				gam=sign(gam)*(180-fabs(gam));
@@ -133,7 +137,7 @@ int main(void)
 				else
 				{
 					echo_angle[8]=60+45;
-					echo_mes[8]=1000;
+					control_mes[8]=1000;
 				}
 				//7
 				if(gam<=90 && gam>=-90)
@@ -143,7 +147,7 @@ int main(void)
 				else
 				{
 					echo_angle[7]=75;
-					echo_mes[7]=1000;
+					control_mes[7]=1000;
 				}
 				//6
 				if((gam>=-90 && gam<=180))
@@ -154,15 +158,24 @@ int main(void)
 				else
 				{
 					echo_angle[6]=30+45;
-					echo_mes[6]=1000;
+					control_mes[6]=1000;
 				}
 				for(war=0;war<450;war+=20){
-					if (echo_mes[0]<war||echo_mes[1]<war||echo_mes[2]<war||echo_mes[3]<war||echo_mes[4]<war||echo_mes[5]<war||
-							echo_mes[6]<war||echo_mes[7]<war||echo_mes[8]<war||echo_mes[9]<war||echo_mes[10]<war||echo_mes[11]<war){
-								if(war>120)
+					if (control_mes[0]<war||control_mes[1]<war||control_mes[2]<war||control_mes[3]<war||control_mes[4]<war||control_mes[5]<war||
+							control_mes[6]<war||control_mes[7]<war||control_mes[8]<war||control_mes[9]<war||control_mes[10]<war||control_mes[11]<war){
+								/*if(war>120)
 									temp=(war<300) ? (uint16_t)(war/100) : (uint16_t)3 ;
 								else 
-									temp=0;
+									temp=0;*/
+								temp=9;
+								for(i=0;i<9;i++)
+								{
+									 if (war<120+20*i)
+									 {
+											temp=i;
+											break;
+									 }
+								}
 								uartTransmitt(0x0B,USART2);
 								uartTransmittBuff((uint8_t*)&temp,2,USART2);
 						break;

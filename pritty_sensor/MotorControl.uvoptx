@@ -265,6 +265,11 @@
           <WinNumber>1</WinNumber>
           <ItemText>echo_mes[12]</ItemText>
         </Ww>
+        <Ww>
+          <count>23</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>control_mes,0x0A</ItemText>
+        </Ww>
       </WatchWindow1>
       <WatchWindow2>
         <Ww>

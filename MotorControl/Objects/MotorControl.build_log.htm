@@ -22,19 +22,15 @@ Dialog DLL:      TCM.DLL V1.42.0.0
  
 <h2>Project:</h2>
 C:\STM32_Files\Kudro_Control_System\MotorControl\MotorControl.uvprojx
-Project File Date:  01/15/2021
+Project File Date:  01/22/2021
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 6 (build 750)', folder: 'C:\Keil_v5\ARM\ARMCC\Bin'
 Build target 'MotorControl'
-compiling main.c...
-.\Lib\inc\rcc.h(9): warning:  #1-D: last line of file ends without a newline
-  #endif
+compiling pdu.c...
 .\Lib\inc\bsp.h(20): warning:  #1-D: last line of file ends without a newline
   #endif
 .\Lib\inc\bsp.h(20): warning:  #1-D: last line of file ends without a newline
-  #endif
-.\Lib\inc\encoder.h(9): warning:  #1-D: last line of file ends without a newline
   #endif
 .\Code\inc\pdu.h(24): warning:  #1295-D: Deprecated declaration normaliz - give arg types
   void normaliz();
@@ -42,16 +38,18 @@ compiling main.c...
   void kinematica();
 .\Code\inc\pdu.h(28): warning:  #1-D: last line of file ends without a newline
   #endif
-.\Code\inc\callback.h(14): warning:  #1-D: last line of file ends without a newline
-  #endif
-.\Code\inc\adc.h(8): warning:  #1-D: last line of file ends without a newline
-  #endif
-.\Code\inc\main.h(30): warning:  #1-D: last line of file ends without a newline
-  #endif
-Code\src\main.c: 10 warnings, 0 errors
+Code\src\pdu.c(484): warning:  #177-D: variable "str1"  was declared but never referenced
+  	char str1[200]={0};
+Code\src\pdu.c(485): warning:  #177-D: variable "str2"  was declared but never referenced
+  	char str2[200]={0};
+Code\src\pdu.c(486): warning:  #177-D: variable "str3"  was declared but never referenced
+  	char str3[200]={0};
+Code\src\pdu.c(487): warning:  #177-D: variable "str4"  was declared but never referenced
+  	char str4[200]={0};
+Code\src\pdu.c: 9 warnings, 0 errors
 linking...
-Program Size: Code=25224 RO-data=968 RW-data=412 ZI-data=1908  
-".\Objects\MotorControl.axf" - 0 Error(s), 10 Warning(s).
+Program Size: Code=25256 RO-data=968 RW-data=412 ZI-data=1908  
+".\Objects\MotorControl.axf" - 0 Error(s), 9 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -77,12 +75,12 @@ Package Vendor: Keil
    * Component: ARM::CMSIS:CORE:5.4.0
 
    * Component: Keil::Device:Startup:2.6.3
-      Include file:  Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
-      Source file:   Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templates\arm\startup_stm32f407xx.s
       Source file:   MDK\Device\Source\ARM\STM32F4xx_OTP.s
+      Source file:   Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templates\arm\startup_stm32f407xx.s
       Source file:   MDK\Device\Source\ARM\STM32F40xxx_41xxx_OPT.s
+      Include file:  Drivers\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
       Source file:   Drivers\CMSIS\Device\ST\STM32F4xx\Source\Templates\system_stm32f4xx.c
-Build Time Elapsed:  00:00:03
+Build Time Elapsed:  00:00:04
 </pre>
 </body>
 </html>

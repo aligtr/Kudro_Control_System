@@ -490,10 +490,10 @@ void kinematica(){
 	switch(mode)
 	{
 		case 1:
-			k_vel=(constract);// добавить 3 режима: 0, V, constract
+			k_vel=(constract)/3.5;// добавить 3 режима: 0, V, constract
 			break;
 		case 2:
-			k_vel=5;// добавить 3 режима: 0, V, constract
+			k_vel=4;// добавить 3 режима: 0, V, constract
 			break;
 		case 3:
 			k_vel=0;
